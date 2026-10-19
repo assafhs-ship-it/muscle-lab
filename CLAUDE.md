@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Muscle Lab** is an exercise library web app in the "Night Session" design (dark, editorial, gold accent). The landing page lists every exercise in three category sections: Home Basics, Core Muscles and Extra Home Strength. Each exercise opens a detail page with an animated form guide, overview and tips, execution steps and the muscles it works. It works on laptop, iPad and phone, and can be added to an iPhone Home Screen.
 
-It is a static site: no build step, no framework and no dependencies (Google Fonts only). It is intended for GitHub Pages from the `main` branch root, like the other projects here. To preview locally, run `python3 -m http.server 8000` and open http://localhost:8000. Opening `index.html` directly also works.
+It is a static site: no build step, no framework and no dependencies (Google Fonts only). It is deployed with GitHub Pages from the `main` branch root of https://github.com/assafhs-ship-it/muscle-lab, and the live site is https://assafhs-ship-it.github.io/muscle-lab/. To publish changes, commit and run `git push origin main`. To preview locally, run `python3 -m http.server 8000` and open http://localhost:8000. Opening `index.html` directly also works.
 
 `muscle-lab-claude-code-prompt.md` is the original design brief. It asked for React/Vite, but the app was built static because Node isn't installed and the other projects deploy to GitHub Pages without a build. The tokens, layout and behaviour follow the brief.
 
