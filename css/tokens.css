@@ -1,0 +1,42 @@
+/* Muscle Lab — design tokens ("Night Session") */
+:root {
+  color-scheme: dark;
+
+  /* Colour */
+  --bg: #12110F;
+  --surface: #1C1A17;
+  --surface-2: #2A2723;
+  --line: #2E2B27;
+  --line-strong: #4A4640;
+  --text: #F1EDE6;
+  --text-2: #C9C3B9;
+  --muted: #A8A196;
+  --gold: #E8B04A;
+  --gold-ink: #1A1408;          /* dark text on gold */
+  --dot-off: #3A3732;
+  --frame-bg: #E9F4FE;          /* matches the illustration paper */
+
+  /* Type */
+  --font-display: "Big Shoulders Display", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --fs-hero: clamp(64px, 9vw, 116px);
+  --fs-detail: clamp(56px, 8vw, 104px);
+  --fs-menu: clamp(36px, 5vw, 52px);
+  --fs-card: clamp(32px, 3.5vw, 42px);
+
+  /* Shape & space */
+  --maxw: 1320px;
+  --gutter: 20px;
+  --r-card: 24px;
+  --r-stage: 32px;
+  --r-pill: 999px;
+  --tap: 44px;
+
+  --shadow-fab: 0 10px 30px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .35);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+@media (max-width: 639px) {
+  :root { --gutter: 16px; }
+}

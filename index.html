@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Muscle Lab</title>
+  <meta name="description" content="Muscle Lab: an exercise library with animated form guides.">
+  <meta name="theme-color" content="#12110F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Muscle Lab">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Manrope:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/styles.css?v=1">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="#/" aria-label="Muscle Lab, home">
+        <span class="brand__bar" aria-hidden="true"></span>
+        <span class="brand__name">Muscle Lab</span>
+      </a>
+      <a class="btn-home" href="#/">
+        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-house"/></svg>
+        <span>Home</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1"></main>
+
+  <a class="fab-home" href="#/" aria-label="Back to home" hidden>
+    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-house"/></svg>
+  </a>
+
+  <!-- Inline stroke icons -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-house" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v11h4.5v-6h4v6h4.5V9"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8.5 5.5v13M15.5 5.5v13"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5"/></symbol>
+  </svg>
+
+  <script src="data/exercises.js?v=1"></script>
+  <script src="js/app.js?v=1"></script>
+</body>
+</html>
