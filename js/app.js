@@ -2,12 +2,12 @@
 (function () {
   'use strict';
 
-  const APP_VERSION = 'V1.0';
+  const APP_VERSION = 'V1.2';
+  const CREATOR = 'Assaf Hovevei Sion';
   const EXERCISES = Array.isArray(window.EXERCISES) ? window.EXERCISES : [];
-  const GROUPS = ['All', 'Legs', 'Chest', 'Back', 'Shoulders', 'Arms', 'Core'];
+  const CATEGORIES = ['Home Basics', 'Core Muscles', 'Extra Home Strength'];
   const LEVELS = { Beginner: 1, Intermediate: 2, Advanced: 3 };
   const SPEEDS = [0.5, 1, 2];
-  const FILTER_KEY = 'muscle-lab:filter';
   const SPEED_KEY = 'muscle-lab:speed';
   const SCROLL_KEY = 'muscle-lab:landing-scroll';
 
@@ -90,12 +90,14 @@
         imgs.forEach((img, k) => img.classList.toggle('is-on', k === index));
         opts.onFrame && opts.onFrame(index, count);
       }
-      function interval() { return 1000 / (fps * speed); }
+      // Optional per-frame timing at 1× (ms), e.g. to hold the top and bottom of a rep.
+      const durations = Array.isArray(anim.durations) && anim.durations.length === count ? anim.durations : null;
+      function interval() { return (durations ? durations[index] : 1000 / fps) / speed; }
       function schedule() {
         clearTimeout(timer);
         if (!playing) return;
         const ms = interval();
-        box.style.setProperty('--fade', `${Math.round(Math.min(ms * 0.45, 420))}ms`);
+        box.style.setProperty('--fade', `${Math.round(Math.min(ms * 0.55, 380))}ms`);
         timer = setTimeout(() => { show(index + 1); schedule(); }, ms);
       }
       show(0);
@@ -110,11 +112,16 @@
     },
 
     image(root, ex, anim) {
+      const box = document.createElement('div');
+      box.className = 'anim-frames anim-frames--still';
       const img = new Image();
-      img.className = 'anim-media';
-      img.src = anim.src;
+      img.className = 'is-on';
       img.alt = `${ex.name} demonstration`;
-      root.appendChild(img);
+      img.decoding = 'async';
+      img.addEventListener('load', () => box.style.setProperty('--ar', img.naturalWidth / img.naturalHeight), { once: true });
+      img.src = anim.src;
+      box.appendChild(img);
+      root.appendChild(box);
       return { frameCount: 1, play() {}, pause() {}, setSpeed() {}, goTo() {}, destroy() {} };
     },
 
@@ -172,91 +179,72 @@
 
   /* ---------- Landing ---------- */
 
-  function renderLanding() {
-    const saved = store.get('localStorage', FILTER_KEY);
-    let filter = GROUPS.includes(saved) ? saved : 'All';
-    const featured = EXERCISES[0];
-    const count = (g) => (g === 'All' ? EXERCISES.length : EXERCISES.filter((e) => e.group === g).length);
+  // The main categories always show, in this order (even when empty); any other category in the data is added after them.
+  function categories() {
+    const extra = EXERCISES.map((e) => e.category).filter((c) => c && !CATEGORIES.includes(c));
+    return [...CATEGORIES, ...new Set(extra)];
+  }
 
+  function card(ex) {
+    const n = EXERCISES.indexOf(ex) + 1;
+    const t = thumbSrc(ex);
+    return `
+      <li>
+        <a class="ex-card" href="#/exercise/${esc(ex.id)}">
+          <div class="ex-card__text">
+            <span class="label label--gold">${pad(n)} · ${esc(ex.group)}</span>
+            <h3 class="ex-card__name">${esc(ex.name)}</h3>
+            ${metaRow(ex)}
+          </div>
+          <div class="thumb${t ? '' : ' thumb--empty'}">
+            ${t ? `<img src="${esc(t)}" alt="" loading="lazy" decoding="async">` : ''}
+            <span class="mini-play" aria-hidden="true">${icon('play', 'icon--fill')}</span>
+          </div>
+        </a>
+      </li>`;
+  }
+
+  function renderLanding() {
     main.innerHTML = `
       <section class="wrap hero page-enter">
         <div class="hero__copy">
           <p class="label label--gold">The movement library</p>
-          <h1 class="hero__title display">Strength,<br><span class="gold">explained.</span></h1>
-          <p class="hero__lead">Clear, animated form guides for the lifts that matter. Pick a body area, open an exercise and follow along between sets.</p>
+          <h1 class="hero__title display">Strength,<br><span class="gold">maximized.</span></h1>
+          <p class="hero__lead">Clear, animated form guides for the lifts that matter. Open an exercise and follow along between sets.</p>
           <div class="hero__actions">
             <button class="btn btn--gold" type="button" data-browse>Browse exercises</button>
-            ${featured ? `<a class="btn btn--outline" href="#/exercise/${esc(featured.id)}">Start with the ${esc(featured.name.split(' ').pop().toLowerCase())}</a>` : ''}
           </div>
         </div>
-        ${featured ? `
-        <a class="now-card" href="#/exercise/${esc(featured.id)}" aria-label="Now playing: ${esc(featured.name)}. Open exercise">
-          <div class="now-card__top">
-            <span class="label">Now playing</span>
-            <span class="label label--gold live">Live</span>
-          </div>
-          <div class="now-card__stage" data-now></div>
-          <div class="now-card__bottom">
-            <div>
-              <div class="now-card__name">${esc(featured.name)}</div>
-              <div class="now-card__meta">${esc(featured.group)} · ${esc(featured.equipment)} · ${esc(featured.level)}</div>
-            </div>
-            <span class="play-circle" aria-hidden="true">${icon('play', 'icon--fill')}</span>
-          </div>
-        </a>` : ''}
+        <figure class="emblem" aria-hidden="true">
+          <span class="emblem__word">Lab</span>
+          <span class="emblem__ring"></span>
+          <img class="emblem__guy" src="assets/guy/guy-general.webp" alt="" width="785" height="1000" decoding="async">
+        </figure>
+        <p class="credit">
+          <span class="credit__label label label--gold">Created by</span>
+          ${CREATOR.split(' ').map((word, k) =>
+            `<span class="credit__line"><span class="credit__word" style="--i:${k}">${esc(word)}</span></span>`).join(' ')}
+        </p>
       </section>
 
-      <section class="wrap library" id="library" aria-labelledby="library-label">
-        <div class="library__head">
-          <p class="label" id="library-label">Choose a body area</p>
-          <div class="areas" role="group" aria-label="Filter by body area">
-            ${GROUPS.map((g) => `<button class="area" type="button" data-group="${g}" aria-pressed="${g === filter}"><span class="area__name">${g}</span><sup>${count(g)}</sup></button>`).join('')}
-          </div>
-        </div>
-        <ul class="grid" data-grid></ul>
-      </section>`;
-
-    const grid = main.querySelector('[data-grid]');
-
-    function drawGrid() {
-      const list = EXERCISES.filter((e) => filter === 'All' || e.group === filter);
-      grid.innerHTML = list.length ? list.map((ex) => {
-        const n = EXERCISES.indexOf(ex) + 1;
-        const t = thumbSrc(ex);
-        return `
-          <li>
-            <a class="ex-card" href="#/exercise/${esc(ex.id)}">
-              <div class="ex-card__text">
-                <span class="label label--gold">${pad(n)} · ${esc(ex.group)}</span>
-                <h2 class="ex-card__name">${esc(ex.name)}</h2>
-                ${metaRow(ex)}
-              </div>
-              <div class="thumb${t ? '' : ' thumb--empty'}">
-                ${t ? `<img src="${esc(t)}" alt="" loading="lazy" decoding="async">` : ''}
-                <span class="mini-play" aria-hidden="true">${icon('play', 'icon--fill')}</span>
-              </div>
-            </a>
-          </li>`;
-      }).join('') : '<li class="empty-note">No exercises in this area yet.</li>';
-    }
-    drawGrid();
-
-    main.querySelector('.areas').addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-group]');
-      if (!btn) return;
-      filter = btn.dataset.group;
-      store.set('localStorage', FILTER_KEY, filter);
-      main.querySelectorAll('[data-group]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-      drawGrid();
-    });
+      <div class="library" id="library">
+        ${categories().map((cat, c) => {
+          const list = EXERCISES.filter((e) => e.category === cat);
+          const headId = `cat-${c + 1}`;
+          return `
+          <section class="wrap category" aria-labelledby="${headId}">
+            <div class="category__head">
+              <span class="label label--gold">${pad(c + 1)}</span>
+              <h2 class="category__title display" id="${headId}">${esc(cat)}<sup>${list.length}</sup></h2>
+            </div>
+            <ul class="grid">${list.length ? list.map(card).join('') : '<li class="empty-note">No exercises yet</li>'}</ul>
+          </section>`;
+        }).join('')}
+      </div>`;
 
     main.querySelector('[data-browse]').addEventListener('click', () => {
       document.getElementById('library').scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
     });
-
-    if (featured) {
-      createAnimation(main.querySelector('[data-now]'), featured, { playing: !reducedMotion.matches, speed: 1 });
-    }
 
     // Remember where we were in the list so Back lands in the same place.
     const saveScroll = () => store.set('sessionStorage', SCROLL_KEY, String(window.scrollY));
@@ -280,7 +268,7 @@
         <section class="stage" aria-label="Exercise animation">
           <div class="stage__top">
             <nav class="crumbs label" aria-label="Breadcrumb">
-              <a href="#/">Library</a><span class="sep" aria-hidden="true">/</span><span>${esc(ex.group)}</span>
+              <a href="#/">Library</a><span class="sep" aria-hidden="true">/</span><span>${esc(ex.category || ex.group)}</span>
             </nav>
             <span class="label" aria-label="Exercise ${i + 1} of ${total}">${pad(i + 1)} / ${pad(total)}</span>
           </div>
@@ -358,12 +346,9 @@
       });
     }
 
+    // Still images and placeholders have nothing to play, so the controls are hidden.
     const animated = ctl.type === 'frames' || ctl.type === 'video';
-    if (!animated) {
-      playBtn.disabled = true;
-      playBtn.style.opacity = '.4';
-      main.querySelector('.speed').style.visibility = 'hidden';
-    }
+    if (!animated) main.querySelector('.stage').classList.add('stage--still');
 
     function setPlaying(on) {
       playing = on && animated;
