@@ -2,11 +2,16 @@
 (function () {
   'use strict';
 
-  const APP_VERSION = 'V1.2';
+  const APP_VERSION = 'V1.3';
   const CREATOR = 'Assaf Hovevei Sion';
   const EXERCISES = Array.isArray(window.EXERCISES) ? window.EXERCISES : [];
   const CATEGORIES = ['Home Basics', 'Core Muscles', 'Extra Home Strength'];
-  const LEVELS = { Beginner: 1, Intermediate: 2, Advanced: 3 };
+  // Optional line under a category title. Text after the first ". " is shown in gold.
+  // icon: 'pulse' (beating heart-rate line) or 'counter' (counts 1–10 three times, lighting a set marker each time).
+  const CATEGORY_TAGLINES = {
+    'Home Basics': { text: '3 × 10. Simple, steady, strong.', icon: 'counter' },
+    'Core Muscles': { text: 'No counting. Just go until you drop.', icon: 'pulse' },
+  };
   const SPEEDS = [0.5, 1, 2];
   const SPEED_KEY = 'muscle-lab:speed';
   const SCROLL_KEY = 'muscle-lab:landing-scroll';
@@ -39,13 +44,9 @@
     set(area, key, val) { try { window[area].setItem(key, val); } catch { /* ignore */ } },
   };
 
-  function dots(level) {
-    const filled = LEVELS[level] || 1;
-    return `<span class="dots" aria-hidden="true">${[1, 2, 3].map((i) => `<i class="${i <= filled ? 'on' : ''}"></i>`).join('')}</span>`;
-  }
-
+  // The difficulty level is kept in the data but no longer shown (the user removed it).
   function metaRow(ex) {
-    return `<span class="meta">${esc(ex.equipment)}<span class="meta__sep" aria-hidden="true">·</span>${dots(ex.level)}<span class="meta__sep" aria-hidden="true">·</span>${esc(ex.level)}</span>`;
+    return `<span class="meta">${esc(ex.equipment)}</span>`;
   }
 
   function frameSrc(anim, n) { return anim.src.replace('{n}', n); }
@@ -185,8 +186,56 @@
     return [...CATEGORIES, ...new Set(extra)];
   }
 
+  function tagline(cat) {
+    const cfg = CATEGORY_TAGLINES[cat];
+    if (!cfg) return '';
+    const { text, icon } = cfg;
+    const cut = text.indexOf('. ');
+    const lead = cut < 0 ? text : text.slice(0, cut + 1);
+    const rest = cut < 0 ? '' : text.slice(cut + 2);
+    const art = icon === 'counter'
+      ? `<span class="tagline__counter" aria-hidden="true"><b class="tagline__rep">10</b><span class="tagline__sets"><i></i><i></i><i></i></span></span>`
+      : `<svg class="tagline__pulse" viewBox="0 0 64 24" aria-hidden="true"><path d="M0 12h18l4-7 6 14 5-11 3 4h28"/></svg>`;
+    return `
+      <p class="tagline tagline--${icon}">
+        ${art}
+        <span class="tagline__text">${esc(lead)}${rest ? ` <span class="gold">${esc(rest)}</span>` : ''}</span>
+      </p>`;
+  }
+
+  // Rep counter: 1→10, light a set marker, three sets, short rest, repeat. Returns a stop function.
+  function runCounter(el) {
+    const rep = el.querySelector('.tagline__rep');
+    const sets = [...el.querySelectorAll('.tagline__sets i')];
+    if (reducedMotion.matches) { rep.textContent = '10'; sets.forEach((d) => d.classList.add('on')); return () => {}; }
+    let n = 0, set = 0, timer = null;
+    const tick = () => {
+      if (set === 3) {                          // all three sets done: rest, then start over
+        set = 0; n = 0; sets.forEach((d) => d.classList.remove('on'));
+        rep.textContent = '0'; timer = setTimeout(tick, 900); return;
+      }
+      n += 1;
+      rep.textContent = String(n);
+      rep.classList.remove('bump'); void rep.offsetWidth; rep.classList.add('bump');
+      if (n === 10) {                           // set complete
+        sets[set].classList.add('on'); set += 1; n = 0;
+        timer = setTimeout(tick, set === 3 ? 1800 : 900); return;
+      }
+      timer = setTimeout(tick, 170);
+    };
+    rep.textContent = '0';
+    timer = setTimeout(tick, 600);
+    return () => clearTimeout(timer);
+  }
+
+  // Exercises are numbered within their own category (01, 02, ... per section).
+  function positionInCategory(ex) {
+    const list = EXERCISES.filter((e) => e.category === ex.category);
+    return { index: list.indexOf(ex) + 1, count: list.length };
+  }
+
   function card(ex) {
-    const n = EXERCISES.indexOf(ex) + 1;
+    const n = positionInCategory(ex).index;
     const t = thumbSrc(ex);
     return `
       <li>
@@ -234,9 +283,13 @@
           return `
           <section class="wrap category" aria-labelledby="${headId}">
             <div class="category__head">
-              <span class="label label--gold">${pad(c + 1)}</span>
-              <h2 class="category__title display" id="${headId}">${esc(cat)}<sup>${list.length}</sup></h2>
+              <span class="category__num" aria-hidden="true">${pad(c + 1)}</span>
+              <div>
+                <p class="category__meta">Section ${pad(c + 1)} · ${list.length} ${list.length === 1 ? 'exercise' : 'exercises'}</p>
+                <h2 class="category__title display" id="${headId}">${esc(cat)}</h2>
+              </div>
             </div>
+            ${tagline(cat)}
             <ul class="grid">${list.length ? list.map(card).join('') : '<li class="empty-note">No exercises yet</li>'}</ul>
           </section>`;
         }).join('')}
@@ -249,7 +302,26 @@
     // Remember where we were in the list so Back lands in the same place.
     const saveScroll = () => store.set('sessionStorage', SCROLL_KEY, String(window.scrollY));
     window.addEventListener('scroll', saveScroll, { passive: true });
-    return () => window.removeEventListener('scroll', saveScroll);
+    // Taglines play their entrance when they scroll into view.
+    let seen = null;
+    const stops = [];
+    const reveal = (t) => {
+      t.classList.add('is-in');
+      if (t.classList.contains('tagline--counter')) stops.push(runCounter(t));
+    };
+    if ('IntersectionObserver' in window) {
+      seen = new IntersectionObserver((entries) => entries.forEach((en) => {
+        if (en.isIntersecting) { reveal(en.target); seen.unobserve(en.target); }
+      }), { threshold: 0.6 });
+      main.querySelectorAll('.tagline').forEach((t) => seen.observe(t));
+    } else {
+      main.querySelectorAll('.tagline').forEach(reveal);
+    }
+    return () => {
+      window.removeEventListener('scroll', saveScroll);
+      if (seen) seen.disconnect();
+      stops.forEach((stop) => stop());
+    };
   }
 
   /* ---------- Exercise detail ---------- */
@@ -257,6 +329,7 @@
   function renderDetail(ex) {
     const i = EXERCISES.indexOf(ex);
     const total = EXERCISES.length;
+    const pos = positionInCategory(ex);
     const prev = EXERCISES[(i - 1 + total) % total];
     const next = EXERCISES[(i + 1) % total];
     const savedSpeed = parseFloat(store.get('localStorage', SPEED_KEY));
@@ -270,7 +343,7 @@
             <nav class="crumbs label" aria-label="Breadcrumb">
               <a href="#/">Library</a><span class="sep" aria-hidden="true">/</span><span>${esc(ex.category || ex.group)}</span>
             </nav>
-            <span class="label" aria-label="Exercise ${i + 1} of ${total}">${pad(i + 1)} / ${pad(total)}</span>
+            <span class="label" aria-label="Exercise ${pos.index} of ${pos.count} in ${esc(ex.category || ex.group)}">${pad(pos.index)} / ${pad(pos.count)}</span>
           </div>
           <div class="stage__anim" data-anim></div>
           <div class="stage__bottom">
@@ -288,7 +361,6 @@
           <div class="title-row__main">
             <h1 class="detail__title display">${esc(ex.name)}</h1>
             <ul class="pills" aria-label="Details">
-              <li class="pill pill--gold">${esc(ex.level)}</li>
               <li class="pill">${esc(ex.equipment)}</li>
               <li class="pill">${esc(ex.group)}</li>
             </ul>

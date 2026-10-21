@@ -14,7 +14,7 @@
   --gold: #E8B04A;
   --gold-ink: #1A1408;          /* dark text on gold */
   --dot-off: #3A3732;
-  --frame-bg: #E9F4FE;          /* matches the illustration paper */
+  --frame-bg: #F4F5F7;          /* matches the white image backdrop */
 
   /* Type */
   --font-display: "Big Shoulders Display", "Oswald", "Arial Narrow", Impact, sans-serif;
