@@ -39,7 +39,7 @@ window.EXERCISES = [
       "Take about 2–3 seconds to lower each rep.",
       "Breathe out as you curl up and in as you lower."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/seated-biceps-curl/{n}.webp?v=2", "frames": 3, "durations": [900, 550, 1000] }
+    "animation": { "type": "frames", "src": "assets/exercises/seated-biceps-curl/{n}.webp?v=3", "frames": 3, "durations": [900, 550, 1000] }
   },
   {
     "id": "seated-shoulder-press",
