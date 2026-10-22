@@ -7,7 +7,7 @@
  * group:    body area shown on the card and pills (Legs, Chest, Back, Shoulders, Arms, Core).
  *
  * animation:
- *   { "type": "image",  "src": "assets/guy/guy1.webp" }
+ *   { "type": "image",  "src": "assets/exercises/<id>/1.webp" }
  *   { "type": "frames", "src": "assets/exercises/<id>/{n}.webp", "frames": 5, "fps": 1.6 }
  *     optional "durations": [ms, ms, ...] — one per frame at 1× speed, instead of fps (e.g. hold the top of a rep)
  *   { "type": "video",  "src": "assets/exercises/<id>/loop.mp4" }
@@ -21,7 +21,7 @@ window.EXERCISES = [
     "category": "Home Basics",
     "equipment": "Dumbbells",
     "level": "Beginner",
-    "description": "Sitting on a bench, you curl a pair of dumbbells from your sides up to your shoulders. Sitting stops you from swinging the weight, so your biceps do all the work.",
+    "description": "Sitting on a bench, you curl a pair of dumbbells from your sides up to your shoulders. Sitting stops you from swinging the weight, so your arm muscles do the work instead of momentum.",
     "steps": [
       "Sit tall on a bench with your feet flat, a dumbbell in each hand, arms hanging straight at your sides.",
       "Turn your palms forward and keep your elbows close to your body.",
@@ -39,7 +39,7 @@ window.EXERCISES = [
       "Take about 2–3 seconds to lower each rep.",
       "Breathe out as you curl up and in as you lower."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/seated-biceps-curl/{n}.webp?v=5", "frames": 2, "durations": [1000, 1000] }
+    "animation": { "type": "frames", "src": "assets/exercises/seated-biceps-curl/{n}.webp?v=7", "frames": 2, "durations": [1000, 1000] }
   },
   {
     "id": "seated-shoulder-press",
@@ -64,10 +64,10 @@ window.EXERCISES = [
     ],
     "tips": [
       "Breathe out as you press and in as you lower.",
-      "Keep your back against the bench or upright, and don't arch to push the weight up.",
+      "Keep your back against the bench (or upright if it has no back support), and don't arch to push the weight up.",
       "Take about 2 seconds to lower each rep."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/seated-shoulder-press/{n}.webp?v=4", "frames": 2, "durations": [1100, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/seated-shoulder-press/{n}.webp?v=6", "frames": 2, "durations": [1100, 1100] }
   },
   {
     "id": "seated-lateral-raise",
@@ -94,7 +94,7 @@ window.EXERCISES = [
       "Don't shrug your shoulders up toward your ears.",
       "Don't swing your body to lift the dumbbells."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/seated-lateral-raise/{n}.webp?v=4", "frames": 3, "durations": [900, 500, 1000] }
+    "animation": { "type": "frames", "src": "assets/exercises/seated-lateral-raise/{n}.webp?v=6", "frames": 3, "durations": [900, 500, 1000] }
   },
   {
     "id": "flat-dumbbell-bench-press",
@@ -121,7 +121,7 @@ window.EXERCISES = [
       "Breathe out as you press and in as you lower.",
       "When you finish, bring the dumbbells to your chest and sit up with them on your thighs."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/flat-dumbbell-bench-press/{n}.webp?v=2", "frames": 2, "durations": [1100, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/flat-dumbbell-bench-press/{n}.webp?v=4", "frames": 2, "durations": [1100, 1100] }
   },
   {
     "id": "lying-dumbbell-triceps-extension",
@@ -133,7 +133,7 @@ window.EXERCISES = [
     "description": "Lying on a flat bench, you hold one dumbbell with both hands and bend only at the elbows to lower it behind your head, then straighten your arms again. Keeping the upper arms still puts the work on the triceps, especially the long head.",
     "steps": [
       "Lie on a flat bench with your head near the end and your feet flat on the floor.",
-      "Hold one dumbbell with both hands, palms cupped under the top plate, arms straight above your head.",
+      "Hold one dumbbell with both hands, palms cupped under the top plate, arms pointing straight up over your face.",
       "Keep your upper arms still and bend your elbows to lower the dumbbell behind your head.",
       "Lower until you feel a stretch in the back of your arms.",
       "Straighten your elbows to bring the dumbbell back up, squeezing your triceps."
@@ -144,11 +144,11 @@ window.EXERCISES = [
       { "name": "Core", "role": "Secondary" }
     ],
     "tips": [
-      "Keep your elbows pointing forward; don't let them flare out to the sides.",
+      "Keep your elbows pointing up toward the ceiling; don't let them flare out to the sides.",
       "Use a light dumbbell and move slowly near your head.",
       "Breathe out as you straighten your arms."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-triceps-extension/{n}.webp?v=5", "frames": 2, "durations": [1100, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-triceps-extension/{n}.webp?v=7", "frames": 2, "durations": [1100, 1100] }
   },
   {
     "id": "elbow-plank",
@@ -177,7 +177,7 @@ window.EXERCISES = [
       "Stop the set when your hips start to sag or your lower back aches.",
       "Don't hold your breath."
     ],
-    "animation": { "type": "image", "src": "assets/exercises/elbow-plank/1.webp?v=2" }
+    "animation": { "type": "image", "src": "assets/exercises/elbow-plank/1.webp?v=4" }
   },
   {
     "id": "bicycle-ab-crunches",
@@ -205,7 +205,7 @@ window.EXERCISES = [
       "Don't pull on your neck; your hands only support your head.",
       "Slow is better than fast: try 3 sets of 10–15 reps per side."
     ],
-    "animation": { "type": "image", "src": "assets/exercises/bicycle-ab-crunches/1.webp" }
+    "animation": { "type": "image", "src": "assets/exercises/bicycle-ab-crunches/1.webp?v=3" }
   },
   {
     "id": "mountain-climbers",
@@ -234,7 +234,7 @@ window.EXERCISES = [
       "Don't let your hips bounce up and down or stick up in the air.",
       "Try 3 rounds of 20–30 seconds, resting 30 seconds between them."
     ],
-    "animation": { "type": "image", "src": "assets/exercises/mountain-climbers/1.webp" }
+    "animation": { "type": "image", "src": "assets/exercises/mountain-climbers/1.webp?v=3" }
   },
   {
     "id": "lying-leg-raises",
@@ -243,7 +243,7 @@ window.EXERCISES = [
     "category": "Core Muscles",
     "equipment": "Bodyweight",
     "level": "Beginner",
-    "description": "Lying on your back, you lift your straight legs up until they point at the ceiling, then lower them slowly without touching the floor. It targets the lower part of the abs, which are hard to reach with crunches.",
+    "description": "Lying on your back, you lift your straight legs up until they point at the ceiling, then lower them slowly without touching the floor. Your hip flexors lift the legs while your abs work hard to keep your pelvis and lower back steady, with extra emphasis on the lower part of the abs.",
     "steps": [
       "Lie on your back with your legs straight and your arms flat by your sides, palms down.",
       "Press your lower back into the floor and brace your core.",
@@ -252,17 +252,17 @@ window.EXERCISES = [
       "Lower your legs slowly, stopping just above the floor before the next rep."
     ],
     "muscles": [
-      { "name": "Lower abdominals", "role": "Primary" },
+      { "name": "Abdominals", "role": "Primary" },
       { "name": "Hip flexors", "role": "Primary" },
       { "name": "Deep core (transverse abdominis)", "role": "Secondary" },
       { "name": "Obliques", "role": "Secondary" }
     ],
     "tips": [
       "If your lower back lifts off the floor, bend your knees slightly or don't lower your legs as far.",
-      "Lower for about 3 seconds; the slow way down does most of the work.",
+      "Lower for about 3 seconds; that slow lowering is where your abs work hardest to keep your back flat.",
       "Try 3 sets of 10–12 reps."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/lying-leg-raises/{n}.webp", "frames": 2, "durations": [1000, 1000] }
+    "animation": { "type": "frames", "src": "assets/exercises/lying-leg-raises/{n}.webp?v=3", "frames": 2, "durations": [1000, 1000] }
   },
   {
     "id": "bird-dog",
@@ -291,7 +291,7 @@ window.EXERCISES = [
       "Reach long rather than high; your arm and leg stop at back height.",
       "Try 3 sets of 8–10 reps per side."
     ],
-    "animation": { "type": "image", "src": "assets/exercises/bird-dog/1.webp" }
+    "animation": { "type": "image", "src": "assets/exercises/bird-dog/1.webp?v=3" }
   },
   {
     "id": "lying-dumbbell-pullover",
@@ -300,7 +300,7 @@ window.EXERCISES = [
     "category": "Extra Home Strength",
     "equipment": "Dumbbell",
     "level": "Intermediate",
-    "description": "Lying on a flat bench, you lower a single dumbbell in an arc behind your head and pull it back over your chest. It stretches and strengthens the lats and chest together, and opens up the rib cage and shoulders.",
+    "description": "Lying on a flat bench, you lower a single dumbbell in an arc behind your head and pull it back over your chest. It stretches and strengthens the chest and lats together, and builds mobility in the shoulders.",
     "steps": [
       "Lie on a flat bench with your head near the end and your feet flat on the floor.",
       "Hold one dumbbell with both hands, palms cupped under the top plate, above your chest.",
@@ -319,7 +319,7 @@ window.EXERCISES = [
       "Keep your lower back on the bench and your ribs down.",
       "Breathe in as you lower and out as you pull the weight back."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-pullover/{n}.webp?v=5", "frames": 4, "durations": [900, 500, 1000, 500] }
+    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-pullover/{n}.webp?v=7", "frames": 4, "durations": [900, 500, 1000, 500] }
   },
   {
     "id": "dumbbell-fly",
@@ -346,269 +346,170 @@ window.EXERCISES = [
       "Keep the bend in your elbows the same all the way; don't turn it into a press.",
       "Don't lower the dumbbells past the point of a comfortable stretch."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-fly/{n}.webp", "frames": 2, "durations": [1100, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-fly/{n}.webp?v=3", "frames": 2, "durations": [1100, 1100] }
   },
   {
-    "id": "back-squat",
-    "name": "Back Squat",
-    "group": "Legs",
-    "category": "To be deleted",
-    "equipment": "Barbell",
-    "level": "Intermediate",
-    "description": "The foundation of lower-body strength. With the bar across your upper back, you sit down and stand back up, training your legs, hips and trunk to work together under load.",
-    "steps": [
-      "Set the bar on your upper back, feet shoulder-width apart, toes turned slightly out.",
-      "Brace your core and take a breath, chest up, eyes forward.",
-      "Push your hips back and bend your knees, tracking them over your toes.",
-      "Lower until your thighs are at least parallel to the floor.",
-      "Drive through your whole foot to stand, exhaling at the top."
-    ],
-    "muscles": [
-      { "name": "Quadriceps", "role": "Primary" },
-      { "name": "Glutes", "role": "Primary" },
-      { "name": "Hamstrings", "role": "Secondary" },
-      { "name": "Core", "role": "Secondary" }
-    ],
-    "tips": [
-      "Keep your heels down the whole time.",
-      "Don't let your knees cave in on the way up."
-    ],
-    "animation": { "type": "image", "src": "assets/guy/guy1.webp?v=2" }
-  },
-  {
-    "id": "push-up",
-    "name": "Push-Up",
+    "id": "close-grip-incline-chest-press",
+    "name": "Close Grip Incline Chest Press",
     "group": "Chest",
-    "category": "To be deleted",
-    "equipment": "Bodyweight",
-    "level": "Beginner",
-    "description": "A bodyweight press you can do anywhere. It trains the chest, shoulders and arms while your core holds your body in a straight line.",
-    "steps": [
-      "Place your hands slightly wider than your shoulders, arms straight.",
-      "Step back so your body forms a straight line from head to heels.",
-      "Lower your chest toward the floor, elbows about 45° from your body.",
-      "Stop just above the floor.",
-      "Push back up to straight arms, keeping your hips in line."
-    ],
-    "muscles": [
-      { "name": "Chest", "role": "Primary" },
-      { "name": "Triceps", "role": "Secondary" },
-      { "name": "Front deltoids", "role": "Secondary" },
-      { "name": "Core", "role": "Secondary" }
-    ],
-    "tips": [
-      "Too hard? Do them with your hands on a bench.",
-      "Don't let your hips sag."
-    ],
-    "animation": { "type": "image", "src": "assets/guy/guy4.webp?v=2" }
-  },
-  {
-    "id": "bench-press",
-    "name": "Bench Press",
-    "group": "Chest",
-    "category": "To be deleted",
-    "equipment": "Barbell",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbells",
     "level": "Intermediate",
-    "description": "The classic upper-body press. Lying on a bench, you lower the bar to your chest and press it back up, building the chest, shoulders and triceps.",
+    "description": "On an incline bench, you press two dumbbells held close together, palms facing each other, from your upper chest to straight above it. The incline targets the upper chest, and the close grip brings in the triceps.",
     "steps": [
-      "Lie on the bench with your eyes under the bar and feet flat on the floor.",
-      "Grip the bar a little wider than shoulder-width and squeeze your shoulder blades together.",
-      "Unrack and hold the bar over your shoulders with straight arms.",
-      "Lower it under control to your mid-chest, elbows about 45° from your body.",
-      "Press back up to straight arms, exhaling as you push."
+      "Set the bench to an incline of about 30–45° and sit back with your feet flat on the floor.",
+      "Hold the dumbbells together against your upper chest, palms facing each other, elbows tucked close to your body.",
+      "Brace your core and press both dumbbells straight up, keeping them touching.",
+      "Straighten your arms at the top and squeeze your chest.",
+      "Lower slowly back to your upper chest, elbows staying close to your sides."
     ],
     "muscles": [
-      { "name": "Chest", "role": "Primary" },
-      { "name": "Triceps", "role": "Secondary" },
+      { "name": "Upper chest", "role": "Primary" },
+      { "name": "Triceps", "role": "Primary" },
       { "name": "Front deltoids", "role": "Secondary" }
     ],
     "tips": [
-      "Keep your glutes on the bench.",
-      "Use a spotter or safety arms when you go heavy."
+      "Squeeze the dumbbells together the whole time; it makes your chest work harder.",
+      "Keep your back and head on the bench.",
+      "Breathe out as you press and in as you lower."
     ],
-    "animation": { "type": "image", "src": "assets/guy/guy7.webp?v=2" }
+    "animation": { "type": "frames", "src": "assets/exercises/close-grip-incline-chest-press/{n}.webp?v=4", "frames": 2, "durations": [1100, 1100] }
   },
   {
-    "id": "shoulder-press",
-    "name": "Shoulder Press",
-    "group": "Shoulders",
-    "category": "To be deleted",
-    "equipment": "Dumbbells",
-    "level": "Intermediate",
-    "description": "A seated overhead press with dumbbells. It builds strong, balanced shoulders, and each arm has to work on its own.",
+    "id": "dumbbell-row",
+    "name": "Dumbbell Row",
+    "group": "Back",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbell",
+    "level": "Beginner",
+    "description": "With one knee and hand on a bench, you pull a dumbbell from the floor up to your hip, one arm at a time. Supporting yourself on the bench keeps your back flat, so your back muscles do the pulling.",
     "steps": [
-      "Sit tall on a bench with back support, a dumbbell in each hand at shoulder height.",
-      "Turn your palms forward, elbows slightly in front of your body.",
-      "Press the dumbbells up until your arms are straight overhead.",
-      "Pause at the top without clanking the weights together.",
-      "Lower slowly back to shoulder height."
+      "Place your left knee and left hand on a flat bench, right foot on the floor, back flat and parallel to the floor.",
+      "Hold a dumbbell in your right hand with your arm hanging straight down.",
+      "Pull the dumbbell up toward your hip, driving your elbow back close to your body.",
+      "Squeeze your shoulder blade toward your spine at the top.",
+      "Lower slowly until your arm is straight, then finish the set and switch sides."
     ],
     "muscles": [
-      { "name": "Deltoids", "role": "Primary" },
-      { "name": "Triceps", "role": "Secondary" },
-      { "name": "Upper chest", "role": "Secondary" }
+      { "name": "Lats", "role": "Primary" },
+      { "name": "Upper back (rhomboids)", "role": "Primary" },
+      { "name": "Rear deltoids", "role": "Secondary" },
+      { "name": "Biceps", "role": "Secondary" }
     ],
     "tips": [
-      "Keep your ribs down, and don't arch your lower back.",
-      "Lower to at least ear height for a full range of motion."
+      "Pull toward your hip to focus on the lats; pulling toward your chest shifts more work to the upper back.",
+      "Don't twist your body to lift the weight; keep your shoulders level.",
+      "Keep your neck in line with your back by looking at the floor."
     ],
-    "animation": { "type": "image", "src": "assets/guy/guy5.webp?v=2" }
+    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-row/{n}.webp?v=4", "frames": 2, "durations": [1000, 1100] }
   },
   {
-    "id": "front-plank",
-    "name": "Front Plank",
-    "group": "Core",
-    "category": "To be deleted",
-    "equipment": "Bodyweight",
+    "id": "chest-supported-rear-delt-fly",
+    "name": "Chest-Supported Rear Delt Fly",
+    "group": "Shoulders",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbells",
     "level": "Beginner",
-    "description": "A hold on your forearms and toes that trains your core to keep your spine steady. Hold the position for time.",
+    "description": "Lying chest-down on an incline bench, you raise a pair of dumbbells out to the sides with your palms facing down. The bench stops you from swinging, so the back of your shoulders and upper back do the work. It balances out pressing exercises and supports good posture.",
     "steps": [
-      "Place your forearms on the floor, elbows under your shoulders.",
-      "Step your feet back so your body forms a straight line.",
-      "Brace your abs and squeeze your glutes.",
-      "Breathe steadily and hold the position.",
-      "Rest when your hips start to sag, then repeat."
+      "Set the bench to a low incline and lie chest-down on it, feet on the floor, a dumbbell in each hand.",
+      "Let your arms hang straight down, palms facing back (an overhand grip), elbows slightly bent.",
+      "Raise the dumbbells out to the sides in a wide arc, leading with your elbows.",
+      "Stop when your arms are level with your body and squeeze your shoulder blades together.",
+      "Lower slowly back to the start."
+    ],
+    "muscles": [
+      { "name": "Rear deltoids", "role": "Primary" },
+      { "name": "Upper back (rhomboids)", "role": "Primary" },
+      { "name": "Middle traps", "role": "Secondary" }
+    ],
+    "tips": [
+      "Use light dumbbells; the rear deltoids are small muscles.",
+      "Keep your chest on the bench and your neck relaxed.",
+      "Don't shrug your shoulders toward your ears as you lift."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/chest-supported-rear-delt-fly/{n}.webp?v=3", "frames": 2, "durations": [1000, 1100] }
+  },
+  {
+    "id": "arnold-press",
+    "name": "Arnold Press",
+    "group": "Shoulders",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbells",
+    "level": "Intermediate",
+    "description": "A seated shoulder press with a twist, named after Arnold Schwarzenegger. You start with your palms facing you and rotate them to face forward as you press overhead, which works the front and side of the shoulders through a longer range of motion.",
+    "steps": [
+      "Sit tall on a bench with back support, holding the dumbbells in front of your shoulders, palms facing you.",
+      "Brace your core and start pressing the dumbbells up.",
+      "As you press, rotate your wrists so your palms turn to face forward.",
+      "Finish with your arms straight overhead, palms forward.",
+      "Lower slowly while rotating back, ending with your palms facing you again."
+    ],
+    "muscles": [
+      { "name": "Front deltoids", "role": "Primary" },
+      { "name": "Side deltoids", "role": "Primary" },
+      { "name": "Triceps", "role": "Secondary" },
+      { "name": "Upper traps", "role": "Secondary" }
+    ],
+    "tips": [
+      "Make the rotation one smooth movement with the press, not a separate step.",
+      "Use lighter dumbbells than for a regular shoulder press.",
+      "Keep your back against the bench; don't arch to push the weight up."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/arnold-press/{n}.webp?v=3", "frames": 2, "durations": [1000, 1100] }
+  },
+  {
+    "id": "seated-overhead-triceps-extension",
+    "name": "Seated Overhead Triceps Extension",
+    "group": "Arms",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbell",
+    "level": "Beginner",
+    "description": "Sitting upright, you hold one dumbbell with both hands overhead and bend your elbows to lower it behind your head, then straighten your arms again. The overhead position stretches the long head of the triceps, building the back of the arm.",
+    "steps": [
+      "Sit tall on a bench with back support, feet flat on the floor.",
+      "Hold one dumbbell with both hands under the top plate and press it straight overhead.",
+      "Keeping your upper arms close to your head, bend your elbows to lower the dumbbell behind your head.",
+      "Lower until you feel a stretch in the back of your arms.",
+      "Straighten your elbows to press the dumbbell back up, squeezing your triceps at the top."
+    ],
+    "muscles": [
+      { "name": "Triceps", "role": "Primary" },
+      { "name": "Core", "role": "Secondary" },
+      { "name": "Forearms", "role": "Secondary" }
+    ],
+    "tips": [
+      "Keep your elbows pointing up and close to your ears; don't let them flare out.",
+      "Brace your core so your lower back doesn't arch.",
+      "Move slowly near your head and use a weight you can control."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/seated-overhead-triceps-extension/{n}.webp?v=3", "frames": 2, "durations": [1000, 1100] }
+  },
+  {
+    "id": "bench-crunch",
+    "name": "Bench Crunch",
+    "group": "Core",
+    "category": "Extra Home Strength",
+    "equipment": "Bench",
+    "level": "Beginner",
+    "description": "Lying on your back with your calves resting on a bench, you curl your shoulders up off the floor toward your knees. Raising your legs reduces how much your hip flexors can help and keeps your lower back flat, so your abs do more of the work.",
+    "steps": [
+      "Lie on your back and rest your calves on a bench, knees and hips bent at about 90°.",
+      "Place your hands lightly behind your head, elbows wide.",
+      "Breathe out and curl your head and shoulders up off the floor, bringing your ribs toward your hips.",
+      "Pause and squeeze your abs at the top.",
+      "Lower slowly back down until your shoulders touch the floor."
     ],
     "muscles": [
       { "name": "Abdominals", "role": "Primary" },
       { "name": "Obliques", "role": "Secondary" },
-      { "name": "Shoulders", "role": "Secondary" },
-      { "name": "Glutes", "role": "Secondary" }
+      { "name": "Deep core (transverse abdominis)", "role": "Secondary" }
     ],
     "tips": [
-      "Start with 3 holds of 20–30 seconds.",
-      "Look at the floor to keep your neck neutral."
+      "Don't pull on your neck; your hands only support your head.",
+      "Keep your lower back pressed into the floor the whole time.",
+      "It's a short movement: lift your shoulders, not your whole back."
     ],
-    "animation": { "type": "image", "src": "assets/guy/guy1.webp?v=2" }
-  },
-  {
-    "id": "deadlift",
-    "name": "Deadlift",
-    "group": "Back",
-    "category": "To be deleted",
-    "equipment": "Barbell",
-    "level": "Advanced",
-    "description": "Lifting a loaded bar from the floor to standing. A full-body pull that builds the posterior chain: back, glutes and hamstrings.",
-    "steps": [
-      "Stand with the bar over your mid-foot, feet hip-width apart.",
-      "Hinge down and grip the bar just outside your legs.",
-      "Flatten your back, lift your chest and pull the slack out of the bar.",
-      "Push the floor away and stand tall, keeping the bar close to your legs.",
-      "Lower it by pushing your hips back first, then bending your knees."
-    ],
-    "muscles": [
-      { "name": "Lower back", "role": "Primary" },
-      { "name": "Glutes", "role": "Primary" },
-      { "name": "Hamstrings", "role": "Primary" },
-      { "name": "Upper back & traps", "role": "Secondary" },
-      { "name": "Forearms", "role": "Secondary" }
-    ],
-    "tips": [
-      "Never round your lower back. Lower the weight if you can't keep it flat.",
-      "Finish by squeezing your glutes, not by leaning back."
-    ],
-    "animation": { "type": "image", "src": "assets/guy/guy2.webp?v=2" }
-  },
-  {
-    "id": "lat-pulldown",
-    "name": "Lat Pulldown",
-    "group": "Back",
-    "category": "To be deleted",
-    "equipment": "Cable machine",
-    "level": "Beginner",
-    "description": "A vertical pull on the cable machine. It builds a wider back and prepares you for pull-ups.",
-    "steps": [
-      "Sit with your thighs locked under the pads and grip the bar wider than your shoulders.",
-      "Lean back slightly and lift your chest.",
-      "Pull the bar down to your upper chest, driving your elbows down and back.",
-      "Squeeze your shoulder blades together at the bottom.",
-      "Let the bar rise slowly until your arms are straight."
-    ],
-    "muscles": [
-      { "name": "Lats", "role": "Primary" },
-      { "name": "Biceps", "role": "Secondary" },
-      { "name": "Rear deltoids", "role": "Secondary" }
-    ],
-    "tips": [
-      "Pull with your elbows, not your hands.",
-      "Don't swing your body to move the weight."
-    ],
-    "animation": { "type": "image", "src": "assets/guy/guy6.webp?v=2" }
-  },
-  {
-    "id": "seated-curl",
-    "name": "Seated Curl",
-    "group": "Arms",
-    "category": "To be deleted",
-    "equipment": "Dumbbells",
-    "level": "Beginner",
-    "description": "A biceps curl done seated, so you can't use your legs or body to swing the weight up. This keeps the work in the biceps.",
-    "steps": [
-      "Sit on the end of a bench, a dumbbell in each hand, arms hanging straight.",
-      "Turn your palms forward and pin your elbows to your sides.",
-      "Curl the dumbbells up toward your shoulders.",
-      "Squeeze your biceps at the top.",
-      "Lower slowly until your arms are fully straight."
-    ],
-    "muscles": [
-      { "name": "Biceps", "role": "Primary" },
-      { "name": "Forearms", "role": "Secondary" }
-    ],
-    "tips": [
-      "Take about 3 seconds to lower each rep.",
-      "Keep your elbows still, and only move your forearms."
-    ],
-    "animation": { "type": "image", "src": "assets/guy/guy3.webp?v=2" }
-  },
-  {
-    "id": "hammer-curl",
-    "name": "Hammer Curl",
-    "group": "Arms",
-    "category": "To be deleted",
-    "equipment": "Dumbbells",
-    "level": "Beginner",
-    "description": "A curl with your palms facing each other. Compared with a regular curl, it works the forearms more and the outer part of the biceps.",
-    "steps": [
-      "Stand tall with a dumbbell in each hand, palms facing your thighs.",
-      "Keep your elbows close to your sides.",
-      "Curl the dumbbells up, keeping your palms facing in.",
-      "Pause just below shoulder height.",
-      "Lower under control to straight arms."
-    ],
-    "muscles": [
-      { "name": "Brachialis", "role": "Primary" },
-      { "name": "Biceps", "role": "Primary" },
-      { "name": "Forearms", "role": "Secondary" }
-    ],
-    "tips": [
-      "You can curl both arms together or one at a time.",
-      "Don't rock your body to lift the weight."
-    ],
-    "animation": { "type": "image", "src": "assets/guy/guy5.webp?v=2" }
-  },
-  {
-    "id": "triceps-pushdown",
-    "name": "Triceps Pushdown",
-    "group": "Arms",
-    "category": "To be deleted",
-    "equipment": "Cable machine",
-    "level": "Beginner",
-    "description": "A cable exercise that isolates the triceps, the muscle that makes up most of your upper arm.",
-    "steps": [
-      "Attach a rope or bar to a high pulley and grip it with both hands.",
-      "Stand tall, lean forward slightly and pin your elbows to your sides.",
-      "Push the handle down until your arms are fully straight.",
-      "Squeeze your triceps at the bottom.",
-      "Let the handle rise slowly back to chest height."
-    ],
-    "muscles": [
-      { "name": "Triceps", "role": "Primary" },
-      { "name": "Forearms", "role": "Secondary" }
-    ],
-    "tips": [
-      "Keep your upper arms still. Only your forearms should move.",
-      "With a rope, spread the ends apart at the bottom."
-    ],
-    "animation": { "type": "image", "src": "assets/guy/guy6.webp?v=2" }
+    "animation": { "type": "image", "src": "assets/exercises/bench-crunch/1.webp?v=3" }
   }
 ];

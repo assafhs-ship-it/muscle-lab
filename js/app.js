@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  const APP_VERSION = 'V1.3';
+  const APP_VERSION = '1.0';   // shown in the footer; bump with each release (1.1, 1.2, ...)
   const CREATOR = 'Assaf Hovevei Sion';
   const EXERCISES = Array.isArray(window.EXERCISES) ? window.EXERCISES : [];
   const CATEGORIES = ['Home Basics', 'Core Muscles', 'Extra Home Strength'];
@@ -11,6 +11,21 @@
   const CATEGORY_TAGLINES = {
     'Home Basics': { text: '3 × 10. Simple, steady, strong.', icon: 'counter' },
     'Core Muscles': { text: 'No counting. Just go until you drop.', icon: 'pulse' },
+  };
+  // Optional source video shown as a card under a category's tagline (opens YouTube in a new tab).
+  const CATEGORY_SOURCES = {
+    'Core Muscles': {
+      url: 'https://www.youtube.com/watch?v=3p8EBPVZ2Iw&list=PLvHNgehwYnWKeOIq03SLrHG-rtSEvMJ-g&index=32',
+      title: '6 Pack Abs For Beginners You Can Do Anywhere',
+      channel: 'THENX',
+      thumb: 'https://i.ytimg.com/vi/3p8EBPVZ2Iw/hqdefault.jpg',
+    },
+    'Extra Home Strength': {
+      url: 'https://www.youtube.com/watch?v=WauhJpdZh5A&list=PLvHNgehwYnWKeOIq03SLrHG-rtSEvMJ-g&index=33',
+      title: 'Ten Great Bench & Dumbbell Exercises',
+      channel: 'Rob Riches',
+      thumb: 'https://i.ytimg.com/vi/WauhJpdZh5A/hqdefault.jpg',
+    },
   };
   const SPEEDS = [0.5, 1, 2];
   const SPEED_KEY = 'muscle-lab:speed';
@@ -186,6 +201,25 @@
     return [...CATEGORIES, ...new Set(extra)];
   }
 
+  function sourceCard(cat) {
+    const src = CATEGORY_SOURCES[cat];
+    if (!src) return '';
+    return `
+      <a class="source" href="${esc(src.url)}" target="_blank" rel="noopener noreferrer"
+         aria-label="Watch the source video on YouTube: ${esc(src.title)} by ${esc(src.channel)} (opens in a new tab)">
+        <span class="source__thumb">
+          <img src="${esc(src.thumb)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">
+          <span class="source__play" aria-hidden="true">${icon('play', 'icon--fill')}</span>
+        </span>
+        <span class="source__body">
+          <span class="label label--gold">Source · Video</span>
+          <span class="source__title">${esc(src.title)}</span>
+          <span class="source__meta">${esc(src.channel)} · YouTube</span>
+        </span>
+        <span class="source__go" aria-hidden="true">${icon('right')}</span>
+      </a>`;
+  }
+
   function tagline(cat) {
     const cfg = CATEGORY_TAGLINES[cat];
     if (!cfg) return '';
@@ -290,6 +324,7 @@
               </div>
             </div>
             ${tagline(cat)}
+            ${sourceCard(cat)}
             <ul class="grid">${list.length ? list.map(card).join('') : '<li class="empty-note">No exercises yet</li>'}</ul>
           </section>`;
         }).join('')}
@@ -522,5 +557,6 @@
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   window.addEventListener('hashchange', route);
   document.documentElement.dataset.version = APP_VERSION;
+  document.querySelectorAll('.site-footer__version').forEach((el) => { el.textContent = `Version ${APP_VERSION}`; });
   route();
 })();
