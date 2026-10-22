@@ -247,7 +247,7 @@ def reflection(fig, foot):
 
 # ---------- 3b. still parts come from frame 1 ----------
 
-COMPOSITE = True         # build later frames from frame 1 + only the region that really moves
+COMPOSITE = False        # off: the user found the composited frames broke some images (2026-10-22)
 DILATE = 0.02            # how far the moving region extends around the moving limb (fraction of image size)
 NUDGE = False            # set per exercise by main() from NUDGE_FOR
 NUDGE_FOR = {'seated-shoulder-press'}   # re-align the moving part on the still upper body (fixes a doubled head)
