@@ -147,7 +147,7 @@ button.play-circle:active { transform: scale(.95); }
   position: absolute; left: 50%; top: -3%; z-index: 0;
   transform: translateX(-50%);
   font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
-  font-size: 52cqw; line-height: .8; letter-spacing: .02em;
+  font-size: 34cqw; line-height: .8; letter-spacing: .02em; white-space: nowrap;   /* sized so "ASSAF" spans the disc */
   color: transparent;
   -webkit-text-stroke: 1.5px rgba(232, 176, 74, .3);
   user-select: none;
@@ -386,13 +386,14 @@ button.play-circle:active { transform: scale(.95); }
 /* ---------- Detail: stage ---------- */
 .detail { padding-top: 24px; padding-bottom: 72px; }
 .stage {
-  display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 18px;
-  height: 620px; padding: 22px 26px;
+  display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 18px;
+  height: 546px; padding: 22px 26px;
   background: var(--surface); border-radius: var(--r-stage); border: 1px solid var(--line);
 }
 .stage__top, .stage__bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-/* stills keep the (empty) control row so their picture is the same size as animated ones */
-.stage--still .stage__bottom { visibility: hidden; }
+/* the play/pause, phase markers and speed row is hidden on every exercise (user's choice);
+   animations just play. The stage is 74px shorter so the picture keeps its earlier size. */
+.stage__bottom { display: none; }
 .crumbs a { color: var(--gold); padding: 10px 0; }
 .crumbs a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .crumbs .sep { margin: 0 8px; color: var(--line-strong); }
@@ -460,6 +461,36 @@ button.play-circle:active { transform: scale(.95); }
 .bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .bar span { display: block; height: 100%; background: var(--gold); border-radius: 2px; }
 
+/* ---------- Detail: muscle map (labelled picture of the working muscles) ---------- */
+.muscle-map { margin-top: 56px; border-top: 2px solid var(--gold); padding-top: 22px; }
+.muscle-map h2 { font-size: 34px; font-weight: 800; margin-bottom: 20px; }
+.muscle-map__figure { margin: 0; display: grid; gap: 14px; justify-items: center; }
+.muscle-map__figure img {
+  width: 100%; max-width: 640px; height: auto; border-radius: 22px;
+  background: var(--frame-bg); box-shadow: 0 0 0 1px rgba(255, 255, 255, .04), 0 18px 40px rgba(0, 0, 0, .35);
+}
+.muscle-map__figure figcaption { display: flex; gap: 22px; }
+.muscle-map__key { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--text-2); }
+.muscle-map__key::before { content: ""; width: 12px; height: 12px; border-radius: 50%; }
+.muscle-map__key--primary::before { background: #D22D28; }
+.muscle-map__key--secondary::before { background: #2878DC; }
+
+/* ---------- Detail: previous / next within the category ---------- */
+.step-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 56px; }
+.step-nav__link {
+  display: flex; align-items: center; gap: 16px; min-height: 84px; padding: 16px 20px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
+  transition: border-color .25s, transform .25s var(--ease);
+}
+.step-nav__link:hover { border-color: var(--gold); transform: translateY(-2px); }
+.step-nav__link--next { justify-content: flex-end; text-align: right; }
+.step-nav__text { display: grid; gap: 4px; min-width: 0; }
+.step-nav__name { font-family: var(--font-display); font-weight: 800; font-size: 26px; text-transform: uppercase; line-height: 1; color: var(--text); }
+.step-nav__icon {
+  display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--gold); color: var(--gold-ink);
+}
+
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--line); padding: 26px 0 calc(26px + env(safe-area-inset-bottom)); }
 .site-footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-right: 96px; }  /* keeps clear of the floating Home button */
@@ -516,6 +547,10 @@ button.play-circle:active { transform: scale(.95); }
   .category + .category { padding-top: 48px; }
   .category__head { gap: 14px; padding-top: 32px; margin-bottom: 20px; }
   .site-footer__inner { flex-direction: column; align-items: flex-start; gap: 6px; padding-right: 84px; }
+  .step-nav { gap: 10px; margin-top: 40px; }
+  .step-nav__link { gap: 10px; padding: 12px; min-height: 72px; }
+  .step-nav__name { font-size: 18px; }
+  .step-nav__icon { width: 36px; height: 36px; }
   .category__meta { font-size: 11px; letter-spacing: .18em; margin-bottom: 6px; }
   .tagline { font-size: 12px; letter-spacing: .04em; gap: 10px; padding: 9px 14px 9px 10px; margin: -2px 0 22px; }
   .tagline__pulse { width: 36px; }
@@ -530,7 +565,7 @@ button.play-circle:active { transform: scale(.95); }
   .thumb { width: 88px; height: 88px; }
 
   .detail { padding-top: 16px; }
-  .stage { height: 420px; padding: 16px; gap: 12px; border-radius: 26px; }
+  .stage { height: 352px; padding: 16px; gap: 12px; border-radius: 26px; }
   .stage__controls { gap: 10px; }
   .pip { width: 16px; }
   .speed button { min-width: 44px; padding: 0 8px; font-size: 13px; }

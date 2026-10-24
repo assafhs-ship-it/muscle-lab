@@ -35,6 +35,7 @@ EXERCISES = {
     'bicycle-ab-crunches': ['Images/Bicycle Ab Crunches/BAC1.png'],   # single still
     'mountain-climbers': ['Images/Mountain Climbers/MC1.png'],        # single still
     'bench-crunch': ['Images/crunch while the legs are on the bench/cwlob1.png'],   # single still
+    'bench-triceps-dips': ['Images/Bench Triceps Dips/BTD1.png'],    # single still, white background
     'bird-dog': ['Images/Bird Dog/BD1.png'],                          # single still
     'lying-leg-raises': ['Images/Lying Leg Raises/LLR1.png',
                          'Images/Lying Leg Raises/LLR2.png'],
@@ -128,11 +129,38 @@ def drop_specks(alpha, max_px=600):
     return np.where(small, 0, alpha)
 
 
+def white_cutout(a):
+    """Cut-out for art on a white background: near-white pixels connected to the picture edge are
+    background (white shoe soles etc. are enclosed by outlines, so they stay). The drawn grey floor
+    shadow is dropped too; the backdrop adds its own."""
+    from scipy import ndimage
+    mn, mx = a.min(axis=2), a.max(axis=2)
+    whiteish = (mn > 200) & (mx - mn < 30)                          # white and pale-grey shadow
+    labels, _ = ndimage.label(whiteish)
+    edge_ids = np.unique(np.concatenate([labels[0], labels[-1], labels[:, 0], labels[:, -1]]))
+    bg = np.isin(labels, edge_ids[edge_ids > 0])
+    # enclosed patches of pure background white (e.g. the gap between bench legs) are background too;
+    # white shoe soles are shaded slightly darker (~244), so they stay
+    for i, sl in enumerate(ndimage.find_objects(labels), 1):
+        m = labels[sl] == i
+        if i not in edge_ids and m.sum() >= 300 and mn[sl][m].mean() >= 248.5:
+            bg[sl] |= m
+    alpha = (~bg).astype(float)
+    # soften the edge: 1px feather where the figure meets the background
+    alpha = np.asarray(Image.fromarray((alpha * 255).astype('uint8')).filter(ImageFilter.GaussianBlur(0.8)), float) / 255
+    alpha = np.where(bg & (alpha < 0.5), 0, alpha)
+    return alpha            # no drop_specks: it would erase small drawn labels such as "90°"
+
+
 def cutout(path):
     """Return a premultiplied ('RGBa') cut-out of the figure."""
     a = np.asarray(Image.open(path).convert('RGB'), float)
     border = np.concatenate([a[:8].reshape(-1, 3), a[-8:].reshape(-1, 3),
                              a[:, :8].reshape(-1, 3), a[:, -8:].reshape(-1, 3)])
+    if np.median(border.min(axis=1)) > 225:                        # white background instead of blue
+        alpha = white_cutout(a)
+        rgba = np.dstack([a, alpha * 255]).clip(0, 255).astype('uint8')
+        return Image.fromarray(rgba).convert('RGBa')
     bg = float(np.median(blueness(border[None])))                 # this picture's background blueness
     lo, hi = bg * 0.25, bg * 0.75                                  # fully opaque below lo, clear above hi
     alpha = np.clip((hi - blueness(a)) / (hi - lo), 0, 1)

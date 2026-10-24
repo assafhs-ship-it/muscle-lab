@@ -3,6 +3,7 @@
  * Edit this list to add, remove or reorder exercises; the app reads nothing else.
  * Everything between the [ and ] is plain JSON (double quotes, no trailing commas).
  *
+ * muscleMap (optional): labelled "muscles worked" picture shown below the info columns (tools/make_muscle_maps.py).
  * category: "Home Basics", "Core Muscles" or "Extra Home Strength" (the landing-page sections).
  * group:    body area shown on the card and pills (Legs, Chest, Back, Shoulders, Arms, Core).
  *
@@ -39,7 +40,8 @@ window.EXERCISES = [
       "Take about 2–3 seconds to lower each rep.",
       "Breathe out as you curl up and in as you lower."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/seated-biceps-curl/{n}.webp?v=8", "frames": 2, "durations": [1000, 1000] }
+    "animation": { "type": "frames", "src": "assets/exercises/seated-biceps-curl/{n}.webp?v=8", "frames": 2, "durations": [1000, 1000] },
+    "muscleMap": "assets/exercises/seated-biceps-curl/muscles.webp?v=3"
   },
   {
     "id": "seated-shoulder-press",
@@ -67,7 +69,8 @@ window.EXERCISES = [
       "Keep your back against the bench (or upright if it has no back support), and don't arch to push the weight up.",
       "Take about 2 seconds to lower each rep."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/seated-shoulder-press/{n}.webp?v=7", "frames": 2, "durations": [1100, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/seated-shoulder-press/{n}.webp?v=7", "frames": 2, "durations": [1100, 1100] },
+    "muscleMap": "assets/exercises/seated-shoulder-press/muscles.webp?v=3"
   },
   {
     "id": "seated-lateral-raise",
@@ -94,7 +97,8 @@ window.EXERCISES = [
       "Don't shrug your shoulders up toward your ears.",
       "Don't swing your body to lift the dumbbells."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/seated-lateral-raise/{n}.webp?v=7", "frames": 3, "durations": [900, 500, 1000] }
+    "animation": { "type": "frames", "src": "assets/exercises/seated-lateral-raise/{n}.webp?v=7", "frames": 3, "durations": [900, 500, 1000] },
+    "muscleMap": "assets/exercises/seated-lateral-raise/muscles.webp?v=3"
   },
   {
     "id": "flat-dumbbell-bench-press",
@@ -121,7 +125,8 @@ window.EXERCISES = [
       "Breathe out as you press and in as you lower.",
       "When you finish, bring the dumbbells to your chest and sit up with them on your thighs."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/flat-dumbbell-bench-press/{n}.webp?v=5", "frames": 2, "durations": [1100, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/flat-dumbbell-bench-press/{n}.webp?v=5", "frames": 2, "durations": [1100, 1100] },
+    "muscleMap": "assets/exercises/flat-dumbbell-bench-press/muscles.webp?v=3"
   },
   {
     "id": "lying-dumbbell-triceps-extension",
@@ -148,7 +153,8 @@ window.EXERCISES = [
       "Use a light dumbbell and move slowly near your head.",
       "Breathe out as you straighten your arms."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-triceps-extension/{n}.webp?v=8", "frames": 2, "durations": [1100, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-triceps-extension/{n}.webp?v=8", "frames": 2, "durations": [1100, 1100] },
+    "muscleMap": "assets/exercises/lying-dumbbell-triceps-extension/muscles.webp?v=3"
   },
   {
     "id": "elbow-plank",
@@ -177,7 +183,37 @@ window.EXERCISES = [
       "Stop the set when your hips start to sag or your lower back aches.",
       "Don't hold your breath."
     ],
-    "animation": { "type": "image", "src": "assets/exercises/elbow-plank/1.webp?v=4" }
+    "animation": { "type": "image", "src": "assets/exercises/elbow-plank/1.webp?v=4" },
+    "muscleMap": "assets/exercises/elbow-plank/muscles.webp?v=3"
+  },
+  {
+    "id": "bench-triceps-dips",
+    "name": "Bench Triceps Dips",
+    "group": "Arms",
+    "category": "Core Muscles",
+    "equipment": "Bench",
+    "level": "Beginner",
+    "description": "With your hands on the edge of a bench behind you and your legs out in front, you lower your body by bending your elbows and push back up. It builds the triceps using only your bodyweight, and holding your torso upright works your core too.",
+    "steps": [
+      "Sit on the edge of a bench and place your hands next to your hips, fingers pointing forward.",
+      "Walk your feet out until your legs are straight, then slide your hips just off the bench.",
+      "Keep your back close to the bench and your chest up, then bend your elbows to lower your body.",
+      "Stop when your upper arms are level with the floor, with your elbows at about 90°.",
+      "Press through your palms to straighten your arms and lift back up."
+    ],
+    "muscles": [
+      { "name": "Triceps", "role": "Primary" },
+      { "name": "Front deltoids", "role": "Secondary" },
+      { "name": "Chest", "role": "Secondary" },
+      { "name": "Core", "role": "Secondary" }
+    ],
+    "tips": [
+      "Keep your elbows pointing straight back, not out to the sides.",
+      "Don't go lower than 90°; dropping too deep strains the front of the shoulders.",
+      "Too hard? Bend your knees and keep your feet closer to the bench."
+    ],
+    "animation": { "type": "image", "src": "assets/exercises/bench-triceps-dips/1.webp" },
+    "muscleMap": "assets/exercises/bench-triceps-dips/muscles.webp?v=3"
   },
   {
     "id": "bicycle-ab-crunches",
@@ -205,7 +241,8 @@ window.EXERCISES = [
       "Don't pull on your neck; your hands only support your head.",
       "Slow is better than fast: try 3 sets of 10–15 reps per side."
     ],
-    "animation": { "type": "image", "src": "assets/exercises/bicycle-ab-crunches/1.webp?v=3" }
+    "animation": { "type": "image", "src": "assets/exercises/bicycle-ab-crunches/1.webp?v=3" },
+    "muscleMap": "assets/exercises/bicycle-ab-crunches/muscles.webp?v=3"
   },
   {
     "id": "mountain-climbers",
@@ -234,7 +271,8 @@ window.EXERCISES = [
       "Don't let your hips bounce up and down or stick up in the air.",
       "Try 3 rounds of 20–30 seconds, resting 30 seconds between them."
     ],
-    "animation": { "type": "image", "src": "assets/exercises/mountain-climbers/1.webp?v=3" }
+    "animation": { "type": "image", "src": "assets/exercises/mountain-climbers/1.webp?v=3" },
+    "muscleMap": "assets/exercises/mountain-climbers/muscles.webp?v=3"
   },
   {
     "id": "lying-leg-raises",
@@ -262,7 +300,8 @@ window.EXERCISES = [
       "Lower for about 3 seconds; that slow lowering is where your abs work hardest to keep your back flat.",
       "Try 3 sets of 10–12 reps."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/lying-leg-raises/{n}.webp?v=4", "frames": 2, "durations": [1000, 1000] }
+    "animation": { "type": "frames", "src": "assets/exercises/lying-leg-raises/{n}.webp?v=4", "frames": 2, "durations": [1000, 1000] },
+    "muscleMap": "assets/exercises/lying-leg-raises/muscles.webp?v=3"
   },
   {
     "id": "bird-dog",
@@ -291,7 +330,8 @@ window.EXERCISES = [
       "Reach long rather than high; your arm and leg stop at back height.",
       "Try 3 sets of 8–10 reps per side."
     ],
-    "animation": { "type": "image", "src": "assets/exercises/bird-dog/1.webp?v=3" }
+    "animation": { "type": "image", "src": "assets/exercises/bird-dog/1.webp?v=3" },
+    "muscleMap": "assets/exercises/bird-dog/muscles.webp?v=3"
   },
   {
     "id": "lying-dumbbell-pullover",
@@ -319,7 +359,8 @@ window.EXERCISES = [
       "Keep your lower back on the bench and your ribs down.",
       "Breathe in as you lower and out as you pull the weight back."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-pullover/{n}.webp?v=8", "frames": 4, "durations": [900, 500, 1000, 500] }
+    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-pullover/{n}.webp?v=8", "frames": 4, "durations": [900, 500, 1000, 500] },
+    "muscleMap": "assets/exercises/lying-dumbbell-pullover/muscles.webp?v=3"
   },
   {
     "id": "dumbbell-fly",
@@ -346,7 +387,8 @@ window.EXERCISES = [
       "Keep the bend in your elbows the same all the way; don't turn it into a press.",
       "Don't lower the dumbbells past the point of a comfortable stretch."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-fly/{n}.webp?v=4", "frames": 2, "durations": [1100, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-fly/{n}.webp?v=4", "frames": 2, "durations": [1100, 1100] },
+    "muscleMap": "assets/exercises/dumbbell-fly/muscles.webp?v=3"
   },
   {
     "id": "close-grip-incline-chest-press",
@@ -373,7 +415,8 @@ window.EXERCISES = [
       "Keep your back and head on the bench.",
       "Breathe out as you press and in as you lower."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/close-grip-incline-chest-press/{n}.webp?v=5", "frames": 2, "durations": [1100, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/close-grip-incline-chest-press/{n}.webp?v=5", "frames": 2, "durations": [1100, 1100] },
+    "muscleMap": "assets/exercises/close-grip-incline-chest-press/muscles.webp?v=3"
   },
   {
     "id": "dumbbell-row",
@@ -401,7 +444,8 @@ window.EXERCISES = [
       "Don't twist your body to lift the weight; keep your shoulders level.",
       "Keep your neck in line with your back by looking at the floor."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-row/{n}.webp?v=5", "frames": 2, "durations": [1000, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-row/{n}.webp?v=5", "frames": 2, "durations": [1000, 1100] },
+    "muscleMap": "assets/exercises/dumbbell-row/muscles.webp?v=3"
   },
   {
     "id": "chest-supported-rear-delt-fly",
@@ -428,7 +472,8 @@ window.EXERCISES = [
       "Keep your chest on the bench and your neck relaxed.",
       "Don't shrug your shoulders toward your ears as you lift."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/chest-supported-rear-delt-fly/{n}.webp?v=4", "frames": 2, "durations": [1000, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/chest-supported-rear-delt-fly/{n}.webp?v=4", "frames": 2, "durations": [1000, 1100] },
+    "muscleMap": "assets/exercises/chest-supported-rear-delt-fly/muscles.webp?v=3"
   },
   {
     "id": "arnold-press",
@@ -456,7 +501,8 @@ window.EXERCISES = [
       "Use lighter dumbbells than for a regular shoulder press.",
       "Keep your back against the bench; don't arch to push the weight up."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/arnold-press/{n}.webp?v=4", "frames": 2, "durations": [1000, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/arnold-press/{n}.webp?v=4", "frames": 2, "durations": [1000, 1100] },
+    "muscleMap": "assets/exercises/arnold-press/muscles.webp?v=3"
   },
   {
     "id": "seated-overhead-triceps-extension",
@@ -483,7 +529,8 @@ window.EXERCISES = [
       "Brace your core so your lower back doesn't arch.",
       "Move slowly near your head and use a weight you can control."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/seated-overhead-triceps-extension/{n}.webp?v=4", "frames": 2, "durations": [1000, 1100] }
+    "animation": { "type": "frames", "src": "assets/exercises/seated-overhead-triceps-extension/{n}.webp?v=4", "frames": 2, "durations": [1000, 1100] },
+    "muscleMap": "assets/exercises/seated-overhead-triceps-extension/muscles.webp?v=3"
   },
   {
     "id": "bench-crunch",
@@ -510,6 +557,7 @@ window.EXERCISES = [
       "Keep your lower back pressed into the floor the whole time.",
       "It's a short movement: lift your shoulders, not your whole back."
     ],
-    "animation": { "type": "image", "src": "assets/exercises/bench-crunch/1.webp?v=3" }
+    "animation": { "type": "image", "src": "assets/exercises/bench-crunch/1.webp?v=3" },
+    "muscleMap": "assets/exercises/bench-crunch/muscles.webp?v=3"
   }
 ];

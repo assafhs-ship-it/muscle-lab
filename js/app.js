@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  const APP_VERSION = '1.1';   // shown in the footer; bump with each release (1.1, 1.2, ...)
+  const APP_VERSION = '1.2';   // shown in the footer; bump with each release (1.1, 1.2, ...)
   const CREATOR = 'Assaf Hovevei Sion';
   const EXERCISES = Array.isArray(window.EXERCISES) ? window.EXERCISES : [];
   const CATEGORIES = ['Home Basics', 'Core Muscles', 'Extra Home Strength'];
@@ -299,9 +299,9 @@
           </div>
         </div>
         <figure class="emblem" aria-hidden="true">
-          <span class="emblem__word">Lab</span>
+          <span class="emblem__word">Assaf</span>
           <span class="emblem__ring"></span>
-          <img class="emblem__guy" src="assets/guy/guy-general.webp" alt="" width="785" height="1000" decoding="async">
+          <img class="emblem__guy" src="assets/guy/guy-general.webp?v=3" alt="" width="785" height="1000" decoding="async">
         </figure>
         <p class="credit">
           <span class="credit__label label label--gold">Created by</span>
@@ -362,13 +362,14 @@
   /* ---------- Exercise detail ---------- */
 
   function renderDetail(ex) {
-    const i = EXERCISES.indexOf(ex);
-    const total = EXERCISES.length;
     const pos = positionInCategory(ex);
-    const prev = EXERCISES[(i - 1 + total) % total];
-    const next = EXERCISES[(i + 1) % total];
-    const savedSpeed = parseFloat(store.get('localStorage', SPEED_KEY));
-    let speed = SPEEDS.includes(savedSpeed) ? savedSpeed : 1;
+    // Previous/next stay inside the exercise's own category and wrap around at the ends.
+    const catList = EXERCISES.filter((e) => e.category === ex.category);
+    const ci = catList.indexOf(ex);
+    const prev = catList[(ci - 1 + catList.length) % catList.length];
+    const next = catList[(ci + 1) % catList.length];
+    const hasSiblings = catList.length > 1;
+    let speed = 1;   // speed controls were removed; animations always play at normal speed
     let playing = !reducedMotion.matches;
 
     main.innerHTML = `
@@ -400,10 +401,10 @@
               <li class="pill">${esc(ex.group)}</li>
             </ul>
           </div>
-          <nav class="pager" aria-label="More exercises">
-            <a class="round-btn" href="#/exercise/${esc(prev.id)}" aria-label="Previous: ${esc(prev.name)}">${icon('left')}</a>
-            <a class="round-btn" href="#/exercise/${esc(next.id)}" aria-label="Next: ${esc(next.name)}">${icon('right')}</a>
-          </nav>
+          ${hasSiblings ? `<nav class="pager" aria-label="More exercises in ${esc(ex.category)}">
+            <a class="round-btn" href="#/exercise/${esc(prev.id)}" aria-label="Previous in ${esc(ex.category)}: ${esc(prev.name)}">${icon('left')}</a>
+            <a class="round-btn" href="#/exercise/${esc(next.id)}" aria-label="Next in ${esc(ex.category)}: ${esc(next.name)}">${icon('right')}</a>
+          </nav>` : ''}
         </div>
 
         <div class="info">
@@ -429,6 +430,25 @@
             </ul>
           </section>
         </div>
+        ${ex.muscleMap ? `
+        <section class="muscle-map" aria-labelledby="h-map">
+          <h2 class="display" id="h-map">Muscle map</h2>
+          <figure class="muscle-map__figure">
+            <img src="${esc(ex.muscleMap)}" alt="${esc(ex.name)} with the working muscles highlighted: ${esc((ex.muscles || []).map((m) => `${m.name} (${m.role.toLowerCase()})`).join(', '))}" loading="lazy" decoding="async">
+            <figcaption><span class="muscle-map__key muscle-map__key--primary">Primary</span><span class="muscle-map__key muscle-map__key--secondary">Secondary</span></figcaption>
+          </figure>
+        </section>` : ''}
+        ${hasSiblings ? `
+        <nav class="step-nav" aria-label="Move between ${esc(ex.category)} exercises">
+          <a class="step-nav__link step-nav__link--prev" href="#/exercise/${esc(prev.id)}">
+            <span class="step-nav__icon" aria-hidden="true">${icon('left')}</span>
+            <span class="step-nav__text"><span class="label">Previous</span><span class="step-nav__name">${esc(prev.name)}</span></span>
+          </a>
+          <a class="step-nav__link step-nav__link--next" href="#/exercise/${esc(next.id)}">
+            <span class="step-nav__text"><span class="label">Next</span><span class="step-nav__name">${esc(next.name)}</span></span>
+            <span class="step-nav__icon" aria-hidden="true">${icon('right')}</span>
+          </a>
+        </nav>` : ''}
       </div>`;
 
     const playBtn = main.querySelector('[data-play]');
@@ -479,8 +499,8 @@
     const onKey = (e) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       const onControl = e.target.closest && e.target.closest('button, a, input, textarea, select');
-      if (e.key === 'ArrowLeft') location.hash = `#/exercise/${prev.id}`;
-      else if (e.key === 'ArrowRight') location.hash = `#/exercise/${next.id}`;
+      if (hasSiblings && e.key === 'ArrowLeft') location.hash = `#/exercise/${prev.id}`;
+      else if (hasSiblings && e.key === 'ArrowRight') location.hash = `#/exercise/${next.id}`;
       else if ((e.key === ' ' || e.key === 'k') && !onControl) { e.preventDefault(); setPlaying(!playing); }
     };
     const onVisible = () => {
