@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  const APP_VERSION = '1.3';   // shown in the footer; bump with each release (1.1, 1.2, ...)
+  const APP_VERSION = '1.4';   // shown in the footer; bump with each release (1.1, 1.2, ...)
   const CREATOR = 'Assaf Hovevei Sion';
   const EXERCISES = Array.isArray(window.EXERCISES) ? window.EXERCISES : [];
   const CATEGORIES = ['Home Basics', 'Core Muscles', 'Extra Home Strength', 'Wrist Flexors'];
@@ -288,15 +288,23 @@
   }
 
   function renderLanding() {
+    const cats = categories();
+    const count = (cat) => EXERCISES.filter((e) => e.category === cat).length;
     main.innerHTML = `
       <section class="wrap hero page-enter">
         <div class="hero__copy">
           <p class="label label--gold">The movement library</p>
           <h1 class="hero__title display">Strength,<br><span class="gold">maximized.</span></h1>
           <p class="hero__lead">Clear, animated form guides for the lifts that matter. Open an exercise and follow along between sets.</p>
-          <div class="hero__actions">
-            <button class="btn btn--gold" type="button" data-browse>Browse exercises</button>
-          </div>
+          <nav class="sec-index" aria-label="Jump to a section">
+            ${cats.map((cat, c) => `
+              <a class="sec-index__row" href="#sec-${c + 1}" data-jump="${c + 1}">
+                <span class="sec-index__num" aria-hidden="true">${pad(c + 1)}</span>
+                <span class="sec-index__name">${esc(cat)}</span>
+                <span class="sec-index__count">${count(cat)}<span class="sr-only"> exercises</span></span>
+                ${icon('right')}
+              </a>`).join('')}
+          </nav>
         </div>
         <figure class="emblem" aria-hidden="true">
           <span class="emblem__word">Assaf</span>
@@ -310,12 +318,21 @@
         </p>
       </section>
 
+      <nav class="sec-bar" aria-label="Sections" aria-hidden="true">
+        <div class="wrap sec-bar__inner">
+          ${cats.map((cat, c) => `
+            <a class="sec-bar__chip" href="#sec-${c + 1}" data-jump="${c + 1}" tabindex="-1">
+              <b>${pad(c + 1)}</b>${esc(cat)}<i>${count(cat)}</i>
+            </a>`).join('')}
+        </div>
+      </nav>
+
       <div class="library" id="library">
-        ${categories().map((cat, c) => {
+        ${cats.map((cat, c) => {
           const list = EXERCISES.filter((e) => e.category === cat);
           const headId = `cat-${c + 1}`;
           return `
-          <section class="wrap category" aria-labelledby="${headId}">
+          <section class="wrap category" id="sec-${c + 1}" aria-labelledby="${headId}">
             <div class="category__head">
               <span class="category__num" aria-hidden="true">${pad(c + 1)}</span>
               <div>
@@ -330,9 +347,46 @@
         }).join('')}
       </div>`;
 
-    main.querySelector('[data-browse]').addEventListener('click', () => {
-      document.getElementById('library').scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
+    // Section index (hero) and sticky chip bar: jump to a section without changing the URL hash,
+    // which the router uses for pages.
+    const bar = main.querySelector('.sec-bar');
+    const chips = [...bar.querySelectorAll('.sec-bar__chip')];
+    const sections = [...main.querySelectorAll('.category')];
+    const index = main.querySelector('.sec-index');
+    main.addEventListener('click', (e) => {
+      const link = e.target.closest('[data-jump]');
+      if (!link) return;
+      e.preventDefault();
+      const target = document.getElementById(`sec-${link.dataset.jump}`);
+      const top = target.getBoundingClientRect().top + window.scrollY - stickyOffset() + 1;
+      window.scrollTo({ top, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     });
+    function stickyOffset() {
+      const header = document.querySelector('.site-header').offsetHeight;
+      return header + (bar.classList.contains('is-on') || window.scrollY > 0 ? bar.offsetHeight : 0);
+    }
+    // Show the bar once the index has scrolled away; highlight the section currently in view.
+    function syncBar() {
+      const header = document.querySelector('.site-header').offsetHeight;
+      const show = index.getBoundingClientRect().bottom < header;
+      bar.classList.toggle('is-on', show);
+      bar.setAttribute('aria-hidden', String(!show));
+      chips.forEach((ch) => { ch.tabIndex = show ? 0 : -1; });
+      const line = header + bar.offsetHeight + 24;
+      let current = -1;
+      sections.forEach((sec, k) => { if (sec.getBoundingClientRect().top <= line) current = k; });
+      chips.forEach((ch, k) => {
+        const on = k === current;
+        if (on && !ch.classList.contains('is-current')) ch.scrollIntoView({ block: 'nearest', inline: 'center' });
+        ch.classList.toggle('is-current', on);
+        if (on) ch.setAttribute('aria-current', 'true'); else ch.removeAttribute('aria-current');
+      });
+    }
+    let raf = 0;
+    const onScrollBar = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; syncBar(); }); };
+    window.addEventListener('scroll', onScrollBar, { passive: true });
+    window.addEventListener('resize', onScrollBar);
+    requestAnimationFrame(syncBar);
 
     // Remember where we were in the list so Back lands in the same place.
     const saveScroll = () => store.set('sessionStorage', SCROLL_KEY, String(window.scrollY));
@@ -354,6 +408,8 @@
     }
     return () => {
       window.removeEventListener('scroll', saveScroll);
+      window.removeEventListener('scroll', onScrollBar);
+      window.removeEventListener('resize', onScrollBar);
       if (seen) seen.disconnect();
       stops.forEach((stop) => stop());
     };

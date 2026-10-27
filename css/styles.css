@@ -134,6 +134,49 @@ button.play-circle:active { transform: scale(.95); }
 }
 .hero__copy { grid-area: copy; align-self: end; display: grid; gap: 24px; align-content: center; }
 
+/* Section index in the hero (editorial table of contents) */
+.sec-index { display: grid; max-width: 520px; margin-top: 6px; border-top: 1px solid var(--line); }
+.sec-index__row {
+  display: grid; grid-template-columns: 52px 1fr auto 20px; align-items: center; gap: 14px;
+  min-height: 60px; border-bottom: 1px solid var(--line);
+  transition: background-color .2s, padding .25s var(--ease);
+}
+.sec-index__row:hover { background: rgba(232, 176, 74, .06); padding-left: 8px; }
+.sec-index__num { font-family: var(--font-display); font-weight: 900; font-size: 30px; line-height: 1; color: transparent; -webkit-text-stroke: 1.2px var(--gold); }
+.sec-index__name { font-family: var(--font-display); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: var(--text); transition: color .2s; }
+.sec-index__row:hover .sec-index__name { color: var(--gold); }
+.sec-index__count { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--muted); }
+.sec-index__row .icon { color: var(--gold); width: 18px; height: 18px; transition: transform .2s var(--ease); }
+.sec-index__row:hover .icon { transform: translateX(4px); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Sticky section chips: slide in under the header once the hero index is out of view */
+.sec-bar {
+  position: sticky; top: calc(72px + env(safe-area-inset-top)); z-index: 19;
+  height: 0; overflow: visible;
+}
+.sec-bar__inner {
+  display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none;
+  padding-top: 10px; padding-bottom: 10px;
+  background: rgba(18, 17, 15, .95); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  transform: translateY(-110%); opacity: 0; pointer-events: none;
+  transition: transform .3s var(--ease), opacity .3s;
+}
+.sec-bar__inner::-webkit-scrollbar { display: none; }
+.sec-bar.is-on .sec-bar__inner { transform: none; opacity: 1; pointer-events: auto; }
+.sec-bar__chip {
+  flex: none; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px;
+  border: 1px solid var(--line-strong); border-radius: var(--r-pill);
+  font-weight: 700; font-size: 14px; color: var(--text-2); white-space: nowrap;
+  transition: background-color .2s, border-color .2s, color .2s;
+}
+.sec-bar__chip b { font-family: var(--font-display); font-size: 18px; color: var(--gold); }
+.sec-bar__chip i { font-style: normal; font-size: 12px; color: var(--muted); }
+.sec-bar__chip:hover { border-color: var(--gold); }
+.sec-bar__chip.is-current { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+.sec-bar__chip.is-current b, .sec-bar__chip.is-current i { color: var(--gold-ink); }
+
 /* Emblem: the page's mascot standing in front of a gold disc */
 .emblem {
   grid-area: emblem;
@@ -179,7 +222,6 @@ button.play-circle:active { transform: scale(.95); }
 @keyframes spin { to { transform: rotate(360deg); } }
 .hero__title { font-size: var(--fs-hero); font-weight: 900; line-height: .88; }
 .hero__lead { color: var(--muted); font-size: 17px; max-width: 46ch; }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
 
 /* Creator credit: words rise in on load, then a gold shine sweeps across them */
 .credit {
@@ -539,7 +581,12 @@ button.play-circle:active { transform: scale(.95); }
   .btn-home { padding: 0 14px 0 12px; }
 
   .hero { padding-top: 32px; padding-bottom: 56px; gap: 32px; }
-  .hero__actions .btn { flex: 1 1 100%; }
+  .sec-index__row { grid-template-columns: 40px 1fr auto 18px; gap: 10px; min-height: 54px; }
+  .sec-index__num { font-size: 24px; }
+  .sec-index__name { font-size: 21px; }
+  .sec-bar { top: calc(64px + env(safe-area-inset-top)); }
+  .sec-bar__inner { gap: 8px; }
+  .sec-bar__chip { min-height: 40px; padding: 0 14px; font-size: 13px; }
   .credit { padding-left: 22px; }
   .credit__label { margin-bottom: 14px; }
 
