@@ -187,35 +187,6 @@ window.EXERCISES = [
     "muscleMap": "assets/exercises/elbow-plank/muscles.webp?v=3"
   },
   {
-    "id": "bench-triceps-dips",
-    "name": "Bench Triceps Dips",
-    "group": "Arms",
-    "category": "Core Muscles",
-    "equipment": "Bench",
-    "level": "Beginner",
-    "description": "With your hands on the edge of a bench behind you and your legs out in front, you lower your body by bending your elbows and push back up. It builds the triceps using only your bodyweight, and holding your torso upright works your core too.",
-    "steps": [
-      "Sit on the edge of a bench and place your hands next to your hips, fingers pointing forward.",
-      "Walk your feet out until your legs are straight, then slide your hips just off the bench.",
-      "Keep your back close to the bench and your chest up, then bend your elbows to lower your body.",
-      "Stop when your upper arms are level with the floor, with your elbows at about 90°.",
-      "Press through your palms to straighten your arms and lift back up."
-    ],
-    "muscles": [
-      { "name": "Triceps", "role": "Primary" },
-      { "name": "Front deltoids", "role": "Secondary" },
-      { "name": "Chest", "role": "Secondary" },
-      { "name": "Core", "role": "Secondary" }
-    ],
-    "tips": [
-      "Keep your elbows pointing straight back, not out to the sides.",
-      "Don't go lower than 90°; dropping too deep strains the front of the shoulders.",
-      "Too hard? Bend your knees and keep your feet closer to the bench."
-    ],
-    "animation": { "type": "image", "src": "assets/exercises/bench-triceps-dips/1.webp" },
-    "muscleMap": "assets/exercises/bench-triceps-dips/muscles.webp?v=3"
-  },
-  {
     "id": "bicycle-ab-crunches",
     "name": "Bicycle Ab Crunches",
     "group": "Core",
@@ -334,146 +305,33 @@ window.EXERCISES = [
     "muscleMap": "assets/exercises/bird-dog/muscles.webp?v=3"
   },
   {
-    "id": "lying-dumbbell-pullover",
-    "name": "Lying Dumbbell Pullover",
-    "group": "Back",
-    "category": "Extra Home Strength",
-    "equipment": "Dumbbell",
-    "level": "Intermediate",
-    "description": "Lying on a flat bench, you lower a single dumbbell in an arc behind your head and pull it back over your chest. It stretches and strengthens the chest and lats together, and builds mobility in the shoulders.",
+    "id": "bench-triceps-dips",
+    "name": "Bench Triceps Dips",
+    "group": "Arms",
+    "category": "Core Muscles",
+    "equipment": "Bench",
+    "level": "Beginner",
+    "description": "With your hands on the edge of a bench behind you and your legs out in front, you lower your body by bending your elbows and push back up. It builds the triceps using only your bodyweight, and holding your torso upright works your core too.",
     "steps": [
-      "Lie on a flat bench with your head near the end and your feet flat on the floor.",
-      "Hold one dumbbell with both hands, palms cupped under the top plate, above your chest.",
-      "Keep a slight bend in your elbows and lower the dumbbell back behind your head in a smooth arc.",
-      "Stop when your arms are about level with the bench and you feel a stretch along your sides.",
-      "Pull the dumbbell back over your chest along the same arc, keeping your elbows' bend the same."
+      "Sit on the edge of a bench and place your hands next to your hips, fingers pointing forward.",
+      "Walk your feet out until your legs are straight, then slide your hips just off the bench.",
+      "Keep your back close to the bench and your chest up, then bend your elbows to lower your body.",
+      "Stop when your upper arms are level with the floor, with your elbows at about 90°.",
+      "Press through your palms to straighten your arms and lift back up."
     ],
     "muscles": [
-      { "name": "Lats", "role": "Primary" },
-      { "name": "Chest", "role": "Primary" },
-      { "name": "Triceps (long head)", "role": "Secondary" },
+      { "name": "Triceps", "role": "Primary" },
+      { "name": "Front deltoids", "role": "Secondary" },
+      { "name": "Chest", "role": "Secondary" },
       { "name": "Core", "role": "Secondary" }
     ],
     "tips": [
-      "Start light; the stretched position puts a lot of load on the shoulders.",
-      "Keep your lower back on the bench and your ribs down.",
-      "Breathe in as you lower and out as you pull the weight back."
+      "Keep your elbows pointing straight back, not out to the sides.",
+      "Don't go lower than 90°; dropping too deep strains the front of the shoulders.",
+      "Too hard? Bend your knees and keep your feet closer to the bench."
     ],
-    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-pullover/{n}.webp?v=8", "frames": 4, "durations": [900, 500, 1000, 500] },
-    "muscleMap": "assets/exercises/lying-dumbbell-pullover/muscles.webp?v=3"
-  },
-  {
-    "id": "dumbbell-fly",
-    "name": "Dumbbell Fly",
-    "group": "Chest",
-    "category": "Extra Home Strength",
-    "equipment": "Dumbbells",
-    "level": "Intermediate",
-    "description": "Lying on a bench, you open your arms out wide in a big arc with a dumbbell in each hand, then bring them back together over your chest, like hugging a tree. It stretches and isolates the chest muscles.",
-    "steps": [
-      "Lie on a flat bench with a dumbbell in each hand, feet flat on the floor.",
-      "Press the dumbbells up over your chest, palms facing each other, elbows slightly bent.",
-      "Keeping that slight bend fixed, open your arms out to the sides in a wide arc.",
-      "Lower until your hands are about level with the bench and you feel a stretch across your chest.",
-      "Squeeze your chest to bring the dumbbells back together over your chest along the same arc."
-    ],
-    "muscles": [
-      { "name": "Chest", "role": "Primary" },
-      { "name": "Front deltoids", "role": "Secondary" },
-      { "name": "Biceps", "role": "Secondary" }
-    ],
-    "tips": [
-      "Use lighter dumbbells than for a press; the long arm makes them feel much heavier.",
-      "Keep the bend in your elbows the same all the way; don't turn it into a press.",
-      "Don't lower the dumbbells past the point of a comfortable stretch."
-    ],
-    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-fly/{n}.webp?v=4", "frames": 2, "durations": [1100, 1100] },
-    "muscleMap": "assets/exercises/dumbbell-fly/muscles.webp?v=3"
-  },
-  {
-    "id": "close-grip-incline-chest-press",
-    "name": "Close Grip Incline Chest Press",
-    "group": "Chest",
-    "category": "Extra Home Strength",
-    "equipment": "Dumbbells",
-    "level": "Intermediate",
-    "description": "On an incline bench, you press two dumbbells held close together, palms facing each other, from your upper chest to straight above it. The incline targets the upper chest, and the close grip brings in the triceps.",
-    "steps": [
-      "Set the bench to an incline of about 30–45° and sit back with your feet flat on the floor.",
-      "Hold the dumbbells together against your upper chest, palms facing each other, elbows tucked close to your body.",
-      "Brace your core and press both dumbbells straight up, keeping them touching.",
-      "Straighten your arms at the top and squeeze your chest.",
-      "Lower slowly back to your upper chest, elbows staying close to your sides."
-    ],
-    "muscles": [
-      { "name": "Upper chest", "role": "Primary" },
-      { "name": "Triceps", "role": "Primary" },
-      { "name": "Front deltoids", "role": "Secondary" }
-    ],
-    "tips": [
-      "Squeeze the dumbbells together the whole time; it makes your chest work harder.",
-      "Keep your back and head on the bench.",
-      "Breathe out as you press and in as you lower."
-    ],
-    "animation": { "type": "frames", "src": "assets/exercises/close-grip-incline-chest-press/{n}.webp?v=5", "frames": 2, "durations": [1100, 1100] },
-    "muscleMap": "assets/exercises/close-grip-incline-chest-press/muscles.webp?v=3"
-  },
-  {
-    "id": "dumbbell-row",
-    "name": "Dumbbell Row",
-    "group": "Back",
-    "category": "Extra Home Strength",
-    "equipment": "Dumbbell",
-    "level": "Beginner",
-    "description": "With one knee and hand on a bench, you pull a dumbbell from the floor up to your hip, one arm at a time. Supporting yourself on the bench keeps your back flat, so your back muscles do the pulling.",
-    "steps": [
-      "Place your left knee and left hand on a flat bench, right foot on the floor, back flat and parallel to the floor.",
-      "Hold a dumbbell in your right hand with your arm hanging straight down.",
-      "Pull the dumbbell up toward your hip, driving your elbow back close to your body.",
-      "Squeeze your shoulder blade toward your spine at the top.",
-      "Lower slowly until your arm is straight, then finish the set and switch sides."
-    ],
-    "muscles": [
-      { "name": "Lats", "role": "Primary" },
-      { "name": "Upper back (rhomboids)", "role": "Primary" },
-      { "name": "Rear deltoids", "role": "Secondary" },
-      { "name": "Biceps", "role": "Secondary" }
-    ],
-    "tips": [
-      "Pull toward your hip to focus on the lats; pulling toward your chest shifts more work to the upper back.",
-      "Don't twist your body to lift the weight; keep your shoulders level.",
-      "Keep your neck in line with your back by looking at the floor."
-    ],
-    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-row/{n}.webp?v=5", "frames": 2, "durations": [1000, 1100] },
-    "muscleMap": "assets/exercises/dumbbell-row/muscles.webp?v=3"
-  },
-  {
-    "id": "chest-supported-rear-delt-fly",
-    "name": "Chest-Supported Rear Delt Fly",
-    "group": "Shoulders",
-    "category": "Extra Home Strength",
-    "equipment": "Dumbbells",
-    "level": "Beginner",
-    "description": "Lying chest-down on an incline bench, you raise a pair of dumbbells out to the sides with your palms facing down. The bench stops you from swinging, so the back of your shoulders and upper back do the work. It balances out pressing exercises and supports good posture.",
-    "steps": [
-      "Set the bench to a low incline and lie chest-down on it, feet on the floor, a dumbbell in each hand.",
-      "Let your arms hang straight down, palms facing back (an overhand grip), elbows slightly bent.",
-      "Raise the dumbbells out to the sides in a wide arc, leading with your elbows.",
-      "Stop when your arms are level with your body and squeeze your shoulder blades together.",
-      "Lower slowly back to the start."
-    ],
-    "muscles": [
-      { "name": "Rear deltoids", "role": "Primary" },
-      { "name": "Upper back (rhomboids)", "role": "Primary" },
-      { "name": "Middle traps", "role": "Secondary" }
-    ],
-    "tips": [
-      "Use light dumbbells; the rear deltoids are small muscles.",
-      "Keep your chest on the bench and your neck relaxed.",
-      "Don't shrug your shoulders toward your ears as you lift."
-    ],
-    "animation": { "type": "frames", "src": "assets/exercises/chest-supported-rear-delt-fly/{n}.webp?v=4", "frames": 2, "durations": [1000, 1100] },
-    "muscleMap": "assets/exercises/chest-supported-rear-delt-fly/muscles.webp?v=3"
+    "animation": { "type": "image", "src": "assets/exercises/bench-triceps-dips/1.webp" },
+    "muscleMap": "assets/exercises/bench-triceps-dips/muscles.webp?v=3"
   },
   {
     "id": "arnold-press",
@@ -533,6 +391,148 @@ window.EXERCISES = [
     "muscleMap": "assets/exercises/seated-overhead-triceps-extension/muscles.webp?v=3"
   },
   {
+    "id": "close-grip-incline-chest-press",
+    "name": "Close Grip Incline Chest Press",
+    "group": "Chest",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbells",
+    "level": "Intermediate",
+    "description": "On an incline bench, you press two dumbbells held close together, palms facing each other, from your upper chest to straight above it. The incline targets the upper chest, and the close grip brings in the triceps.",
+    "steps": [
+      "Set the bench to an incline of about 30–45° and sit back with your feet flat on the floor.",
+      "Hold the dumbbells together against your upper chest, palms facing each other, elbows tucked close to your body.",
+      "Brace your core and press both dumbbells straight up, keeping them touching.",
+      "Straighten your arms at the top and squeeze your chest.",
+      "Lower slowly back to your upper chest, elbows staying close to your sides."
+    ],
+    "muscles": [
+      { "name": "Upper chest", "role": "Primary" },
+      { "name": "Triceps", "role": "Primary" },
+      { "name": "Front deltoids", "role": "Secondary" }
+    ],
+    "tips": [
+      "Squeeze the dumbbells together the whole time; it makes your chest work harder.",
+      "Keep your back and head on the bench.",
+      "Breathe out as you press and in as you lower."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/close-grip-incline-chest-press/{n}.webp?v=5", "frames": 2, "durations": [1100, 1100] },
+    "muscleMap": "assets/exercises/close-grip-incline-chest-press/muscles.webp?v=3"
+  },
+  {
+    "id": "lying-dumbbell-pullover",
+    "name": "Lying Dumbbell Pullover",
+    "group": "Back",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbell",
+    "level": "Intermediate",
+    "description": "Lying on a flat bench, you lower a single dumbbell in an arc behind your head and pull it back over your chest. It stretches and strengthens the chest and lats together, and builds mobility in the shoulders.",
+    "steps": [
+      "Lie on a flat bench with your head near the end and your feet flat on the floor.",
+      "Hold one dumbbell with both hands, palms cupped under the top plate, above your chest.",
+      "Keep a slight bend in your elbows and lower the dumbbell back behind your head in a smooth arc.",
+      "Stop when your arms are about level with the bench and you feel a stretch along your sides.",
+      "Pull the dumbbell back over your chest along the same arc, keeping your elbows' bend the same."
+    ],
+    "muscles": [
+      { "name": "Lats", "role": "Primary" },
+      { "name": "Chest", "role": "Primary" },
+      { "name": "Triceps (long head)", "role": "Secondary" },
+      { "name": "Core", "role": "Secondary" }
+    ],
+    "tips": [
+      "Start light; the stretched position puts a lot of load on the shoulders.",
+      "Keep your lower back on the bench and your ribs down.",
+      "Breathe in as you lower and out as you pull the weight back."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/lying-dumbbell-pullover/{n}.webp?v=8", "frames": 4, "durations": [900, 500, 1000, 500] },
+    "muscleMap": "assets/exercises/lying-dumbbell-pullover/muscles.webp?v=3"
+  },
+  {
+    "id": "dumbbell-fly",
+    "name": "Dumbbell Fly",
+    "group": "Chest",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbells",
+    "level": "Intermediate",
+    "description": "Lying on a bench, you open your arms out wide in a big arc with a dumbbell in each hand, then bring them back together over your chest, like hugging a tree. It stretches and isolates the chest muscles.",
+    "steps": [
+      "Lie on a flat bench with a dumbbell in each hand, feet flat on the floor.",
+      "Press the dumbbells up over your chest, palms facing each other, elbows slightly bent.",
+      "Keeping that slight bend fixed, open your arms out to the sides in a wide arc.",
+      "Lower until your hands are about level with the bench and you feel a stretch across your chest.",
+      "Squeeze your chest to bring the dumbbells back together over your chest along the same arc."
+    ],
+    "muscles": [
+      { "name": "Chest", "role": "Primary" },
+      { "name": "Front deltoids", "role": "Secondary" },
+      { "name": "Biceps", "role": "Secondary" }
+    ],
+    "tips": [
+      "Use lighter dumbbells than for a press; the long arm makes them feel much heavier.",
+      "Keep the bend in your elbows the same all the way; don't turn it into a press.",
+      "Don't lower the dumbbells past the point of a comfortable stretch."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-fly/{n}.webp?v=4", "frames": 2, "durations": [1100, 1100] },
+    "muscleMap": "assets/exercises/dumbbell-fly/muscles.webp?v=3"
+  },
+  {
+    "id": "chest-supported-rear-delt-fly",
+    "name": "Chest-Supported Rear Delt Fly",
+    "group": "Shoulders",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbells",
+    "level": "Beginner",
+    "description": "Lying chest-down on an incline bench, you raise a pair of dumbbells out to the sides with your palms facing down. The bench stops you from swinging, so the back of your shoulders and upper back do the work. It balances out pressing exercises and supports good posture.",
+    "steps": [
+      "Set the bench to a low incline and lie chest-down on it, feet on the floor, a dumbbell in each hand.",
+      "Let your arms hang straight down, palms facing back (an overhand grip), elbows slightly bent.",
+      "Raise the dumbbells out to the sides in a wide arc, leading with your elbows.",
+      "Stop when your arms are level with your body and squeeze your shoulder blades together.",
+      "Lower slowly back to the start."
+    ],
+    "muscles": [
+      { "name": "Rear deltoids", "role": "Primary" },
+      { "name": "Upper back (rhomboids)", "role": "Primary" },
+      { "name": "Middle traps", "role": "Secondary" }
+    ],
+    "tips": [
+      "Use light dumbbells; the rear deltoids are small muscles.",
+      "Keep your chest on the bench and your neck relaxed.",
+      "Don't shrug your shoulders toward your ears as you lift."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/chest-supported-rear-delt-fly/{n}.webp?v=4", "frames": 2, "durations": [1000, 1100] },
+    "muscleMap": "assets/exercises/chest-supported-rear-delt-fly/muscles.webp?v=3"
+  },
+  {
+    "id": "dumbbell-row",
+    "name": "Dumbbell Row",
+    "group": "Back",
+    "category": "Extra Home Strength",
+    "equipment": "Dumbbell",
+    "level": "Beginner",
+    "description": "With one knee and hand on a bench, you pull a dumbbell from the floor up to your hip, one arm at a time. Supporting yourself on the bench keeps your back flat, so your back muscles do the pulling.",
+    "steps": [
+      "Place your left knee and left hand on a flat bench, right foot on the floor, back flat and parallel to the floor.",
+      "Hold a dumbbell in your right hand with your arm hanging straight down.",
+      "Pull the dumbbell up toward your hip, driving your elbow back close to your body.",
+      "Squeeze your shoulder blade toward your spine at the top.",
+      "Lower slowly until your arm is straight, then finish the set and switch sides."
+    ],
+    "muscles": [
+      { "name": "Lats", "role": "Primary" },
+      { "name": "Upper back (rhomboids)", "role": "Primary" },
+      { "name": "Rear deltoids", "role": "Secondary" },
+      { "name": "Biceps", "role": "Secondary" }
+    ],
+    "tips": [
+      "Pull toward your hip to focus on the lats; pulling toward your chest shifts more work to the upper back.",
+      "Don't twist your body to lift the weight; keep your shoulders level.",
+      "Keep your neck in line with your back by looking at the floor."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/dumbbell-row/{n}.webp?v=5", "frames": 2, "durations": [1000, 1100] },
+    "muscleMap": "assets/exercises/dumbbell-row/muscles.webp?v=3"
+  },
+  {
     "id": "bench-crunch",
     "name": "Bench Crunch",
     "group": "Core",
@@ -559,5 +559,87 @@ window.EXERCISES = [
     ],
     "animation": { "type": "image", "src": "assets/exercises/bench-crunch/1.webp?v=3" },
     "muscleMap": "assets/exercises/bench-crunch/muscles.webp?v=3"
+  },
+  {
+    "id": "wrist-curls",
+    "name": "Wrist Curls",
+    "group": "Forearms",
+    "category": "Wrist Flexors",
+    "equipment": "Dumbbells",
+    "level": "Beginner",
+    "description": "Sitting on a bench with your forearms resting on your thighs, palms up, you curl the dumbbells up by bending only at the wrists. It strengthens the wrist flexors on the inside of the forearm, which helps your grip on every pulling and curling exercise.",
+    "steps": [
+      "Sit on the end of a bench, feet flat and wide, a dumbbell in each hand.",
+      "Rest your forearms on your thighs, palms facing up, with your wrists just past your knees.",
+      "Let the dumbbells roll down toward your fingertips and lower your hands as far as is comfortable.",
+      "Curl the dumbbells up by bending only your wrists, as high as you can.",
+      "Squeeze at the top for a moment, then lower slowly."
+    ],
+    "muscles": [
+      { "name": "Wrist flexors (inner forearm)", "role": "Primary" },
+      { "name": "Grip muscles of the hand", "role": "Secondary" }
+    ],
+    "tips": [
+      "Keep your forearms flat on your thighs; only your wrists should move.",
+      "Use light weights and higher reps, such as 15–20 per set.",
+      "Move slowly; don't let the dumbbells drop at the bottom."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/wrist-curls/{n}.webp", "frames": 2, "durations": [1000, 1000] },
+    "muscleMap": "assets/exercises/wrist-curls/muscles.webp?v=3"
+  },
+  {
+    "id": "reverse-wrist-curls",
+    "name": "Reverse Wrist Curls",
+    "group": "Forearms",
+    "category": "Wrist Flexors",
+    "equipment": "Dumbbells",
+    "level": "Beginner",
+    "description": "Sitting on a bench with your forearms resting on your thighs, palms facing down, you lift the dumbbells by bending your wrists upward. It's the opposite of a wrist curl: it trains the wrist extensors on the top of the forearm, balancing your grip strength and helping protect the elbows.",
+    "steps": [
+      "Sit on the end of a bench, feet flat and wide, a dumbbell in each hand.",
+      "Rest your forearms on your thighs, palms facing down, with your wrists just past your knees.",
+      "Let your hands drop down toward the floor as far as is comfortable.",
+      "Lift the dumbbells by bending your wrists upward, keeping your forearms flat on your thighs.",
+      "Pause at the top, then lower slowly."
+    ],
+    "muscles": [
+      { "name": "Wrist extensors (top of forearm)", "role": "Primary" },
+      { "name": "Grip muscles of the hand", "role": "Secondary" }
+    ],
+    "tips": [
+      "Use lighter dumbbells than for regular wrist curls; these muscles are weaker.",
+      "Keep your forearms still; only your wrists should move.",
+      "Try 15–20 slow reps per set."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/reverse-wrist-curls/{n}.webp", "frames": 2, "durations": [1000, 1000] },
+    "muscleMap": "assets/exercises/reverse-wrist-curls/muscles.webp?v=4"
+  },
+  {
+    "id": "hammer-curl",
+    "name": "Hammer Curl",
+    "group": "Arms",
+    "category": "Wrist Flexors",
+    "equipment": "Dumbbells",
+    "level": "Beginner",
+    "description": "Sitting on a bench with your palms facing each other, you curl the dumbbells up to your shoulders. The neutral grip shifts work from the biceps to the brachialis and the forearm muscles, so it builds thicker arms and a stronger grip.",
+    "steps": [
+      "Sit tall on a bench with your feet flat, a dumbbell in each hand, arms hanging at your sides.",
+      "Turn your palms to face each other, thumbs pointing forward, and keep your elbows close to your body.",
+      "Curl both dumbbells up toward your shoulders, keeping your palms facing in.",
+      "Squeeze for a moment at the top.",
+      "Lower slowly until your arms are straight again."
+    ],
+    "muscles": [
+      { "name": "Brachialis", "role": "Primary" },
+      { "name": "Forearms (brachioradialis)", "role": "Primary" },
+      { "name": "Biceps", "role": "Secondary" }
+    ],
+    "tips": [
+      "Keep your wrists straight, like holding a hammer, the whole time.",
+      "Don't swing the dumbbells or rock your body to lift them.",
+      "Take about 2–3 seconds to lower each rep."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/hammer-curl/{n}.webp", "frames": 2, "durations": [1000, 1100] },
+    "muscleMap": "assets/exercises/hammer-curl/muscles.webp?v=3"
   }
 ];

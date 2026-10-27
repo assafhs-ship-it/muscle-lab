@@ -51,6 +51,12 @@ EXERCISES = {
                      'Images/Arnold Presses/AP2.png'],
     'seated-overhead-triceps-extension': ['Images/Sitting overhead extension/she1.png',
                                           'Images/Sitting overhead extension/she2.png'],
+    'wrist-curls': ['Images/Wrist curls 1/WC1.png',
+                    'Images/Wrist curls 1/WC2.png'],
+    'reverse-wrist-curls': ['Images/Reverse curl wrist/WCR1.png',
+                            'Images/Reverse curl wrist/WCR2.png'],
+    'hammer-curl': ['Images/Hammer curl/HC2.png',      # arms down first,
+                    'Images/Hammer curl/HC1.png'],     # then curled up
     # pullover: LDP1 deep stretch, LDP2 arms back, LDP3 over the chest; played 1-2-3-2 so the loop is smooth
     'lying-dumbbell-pullover': ['Images/Lying Dumbbell Pullover/LDP1.png',
                                 'Images/Lying Dumbbell Pullover/LDP2.png',
@@ -63,7 +69,7 @@ EXERCISES = {
 ALIGN_RIGHT = {'lying-leg-raises'}
 RIGHT = 0.55             # with ALIGN_RIGHT, use the part of the figure right of 55% of its width
 # Exercises aligned on the bench's grey metal frame only (when dumbbells hang near the bench feet).
-ALIGN_METAL = {'chest-supported-rear-delt-fly'}
+ALIGN_METAL = {'chest-supported-rear-delt-fly', 'hammer-curl'}
 # Where the wall meets the floor, as a fraction of the figure's height above its lowest point.
 # Raise it for perspective drawings where the man lies "behind" the bench feet.
 FLOOR_FOR = {'bench-crunch': 0.30}

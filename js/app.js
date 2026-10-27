@@ -2,10 +2,10 @@
 (function () {
   'use strict';
 
-  const APP_VERSION = '1.2';   // shown in the footer; bump with each release (1.1, 1.2, ...)
+  const APP_VERSION = '1.3';   // shown in the footer; bump with each release (1.1, 1.2, ...)
   const CREATOR = 'Assaf Hovevei Sion';
   const EXERCISES = Array.isArray(window.EXERCISES) ? window.EXERCISES : [];
-  const CATEGORIES = ['Home Basics', 'Core Muscles', 'Extra Home Strength'];
+  const CATEGORIES = ['Home Basics', 'Core Muscles', 'Extra Home Strength', 'Wrist Flexors'];
   // Optional line under a category title. Text after the first ". " is shown in gold.
   // icon: 'pulse' (beating heart-rate line) or 'counter' (counts 1–10 three times, lighting a set marker each time).
   const CATEGORY_TAGLINES = {
