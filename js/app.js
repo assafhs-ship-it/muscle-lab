@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  const APP_VERSION = '1.5';   // shown in the footer; bump with each release (1.1, 1.2, ...)
+  const APP_VERSION = '1.6';   // shown in the footer; bump with each release (1.1, 1.2, ...)
   const CREATOR = 'Assaf Hovevei Sion';
   const EXERCISES = Array.isArray(window.EXERCISES) ? window.EXERCISES : [];
   const CATEGORIES = ['Home Basics', 'Core Muscles', 'Extra Home Strength', 'Wrist Flexors'];
@@ -662,5 +662,6 @@
   window.addEventListener('hashchange', route);
   document.documentElement.dataset.version = APP_VERSION;
   document.querySelectorAll('.site-footer__version').forEach((el) => { el.textContent = `Version ${APP_VERSION}`; });
+  document.querySelectorAll('.brand__version').forEach((el) => { el.textContent = `v${APP_VERSION}`; });
   route();
 })();

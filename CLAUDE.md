@@ -45,4 +45,4 @@ It is a static site: no build step, no framework and no dependencies (Google Fon
 - **Keyboard**: on a detail page, ←/→ go to the previous/next exercise in the same category, and Space or K toggles play when focus isn't on a control.
 - Each exercise still has a `level` in the data, but the site no longer shows it (the user removed the level tag and difficulty dots). In the muscle bars, Primary fills 100% and Secondary fills 55%.
 - **Version**: `APP_VERSION` at the top of `js/app.js` is shown as "Version N" in the footer (`.site-footer__version`), next to "Muscle Lab by Assaf HS". It started at 1.0 on 2026-10-22; bump it (1.1, 1.2, …) with each pushed release. Don't select the footer with `[data-version]`: `<html>` also carries that attribute, and doing so once wiped the whole page.
-- **Header**: the brand reads "MUSCLE LAB by Assaf HS", with "by Assaf HS" smaller and in gold (`.brand__by`).
+- **Header**: the brand reads "MUSCLE LAB by Assaf HS", with "by Assaf HS" smaller and in gold (`.brand__by`), followed by a small outlined version pill (`.brand__version`, "v" + `APP_VERSION`, filled by app.js like the footer).
