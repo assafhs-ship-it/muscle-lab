@@ -641,5 +641,60 @@ window.EXERCISES = [
     ],
     "animation": { "type": "frames", "src": "assets/exercises/hammer-curl/{n}.webp", "frames": 2, "durations": [1000, 1100] },
     "muscleMap": "assets/exercises/hammer-curl/muscles.webp?v=3"
+  },
+  {
+    "id": "single-arm-dumbbell-triceps-kickback",
+    "name": "Single-Arm Dumbbell Triceps Kickback",
+    "group": "Arms",
+    "category": "Wrist Flexors",
+    "equipment": "Dumbbell",
+    "level": "Beginner",
+    "description": "With one knee and hand on a bench and your upper arm held level with your back, you straighten your elbow to swing a dumbbell back until your arm is straight. Keeping the upper arm still isolates the triceps, so even a light weight works them hard.",
+    "steps": [
+      "Place your left knee and left hand on a flat bench, back flat, a dumbbell in your right hand.",
+      "Lift your right elbow until your upper arm is level with your back, elbow bent at about 90°.",
+      "Keeping your upper arm still, straighten your elbow to push the dumbbell back.",
+      "Squeeze your triceps for a moment when your arm is fully straight.",
+      "Bend your elbow slowly back to 90°, then finish the set and switch sides."
+    ],
+    "muscles": [
+      { "name": "Triceps", "role": "Primary" },
+      { "name": "Rear deltoids", "role": "Secondary" },
+      { "name": "Core", "role": "Secondary" }
+    ],
+    "tips": [
+      "Only your forearm should move; if your elbow drops, the weight is too heavy.",
+      "Use a light dumbbell and pause at the top of every rep.",
+      "Keep your back flat and your neck in line with it."
+    ],
+    "animation": { "type": "frames", "src": "assets/exercises/single-arm-dumbbell-triceps-kickback/{n}.webp", "frames": 2, "durations": [1000, 1100] },
+    "muscleMap": "assets/exercises/single-arm-dumbbell-triceps-kickback/muscles.webp?v=3"
+  },
+  {
+    "id": "arm-rotation",
+    "name": "Arm Rotation",
+    "group": "Forearms",
+    "category": "Wrist Flexors",
+    "equipment": "Dumbbells",
+    "level": "Beginner",
+    "description": "Sitting on a bench with your elbows resting near your knees, you slowly turn the dumbbells, rotating your forearms so your palms turn from facing down to facing up and back. It strengthens the small muscles that twist the forearm, which protect the wrists and elbows and improve grip control.",
+    "steps": [
+      "Sit on the end of a bench, feet flat, a dumbbell in each hand.",
+      "Lean forward and rest your forearms on or just above your knees, elbows bent.",
+      "Start with your palms facing down and the dumbbells level.",
+      "Slowly rotate your forearms to turn your palms up, keeping your elbows still.",
+      "Rotate back to palms down with control, and keep going for the whole set."
+    ],
+    "muscles": [
+      { "name": "Forearm rotators (supinator and pronators)", "role": "Primary" },
+      { "name": "Grip muscles of the hand", "role": "Secondary" }
+    ],
+    "tips": [
+      "Use light dumbbells and move slowly; this is about control, not weight.",
+      "Turn only your forearms; keep your upper arms and elbows still.",
+      "Holding the dumbbell further from its centre makes it harder."
+    ],
+    "animation": { "type": "image", "src": "assets/exercises/arm-rotation/1.webp?v=2" },
+    "muscleMap": "assets/exercises/arm-rotation/muscles.webp?v=4"
   }
 ];

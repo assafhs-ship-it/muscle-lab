@@ -57,6 +57,9 @@ EXERCISES = {
                             'Images/Reverse curl wrist/WCR2.png'],
     'hammer-curl': ['Images/Hammer curl/HC2.png',      # arms down first,
                     'Images/Hammer curl/HC1.png'],     # then curled up
+    'single-arm-dumbbell-triceps-kickback': ['Images/Single-Arm Dumbbell Triceps Kickback/SAD1.png',
+                                             'Images/Single-Arm Dumbbell Triceps Kickback/SAD2.png'],
+    'arm-rotation': ['Images/Arm Rotation/AR2.png'],   # single still; its blue rotation arrows are kept (KEEP)
     # pullover: LDP1 deep stretch, LDP2 arms back, LDP3 over the chest; played 1-2-3-2 so the loop is smooth
     'lying-dumbbell-pullover': ['Images/Lying Dumbbell Pullover/LDP1.png',
                                 'Images/Lying Dumbbell Pullover/LDP2.png',
@@ -70,6 +73,13 @@ ALIGN_RIGHT = {'lying-leg-raises'}
 RIGHT = 0.55             # with ALIGN_RIGHT, use the part of the figure right of 55% of its width
 # Exercises aligned on the bench's grey metal frame only (when dumbbells hang near the bench feet).
 ALIGN_METAL = {'chest-supported-rear-delt-fly', 'hammer-curl'}
+# Aligned on the black bench pad (pad_mask): the kickback's SAD1 is a close-up with the bench legs cut off.
+ALIGN_PAD = {'single-arm-dumbbell-triceps-kickback'}
+# Boxes (source pixels) to erase from a picture's cut-out, keyed by file name.
+ERASE = {'SAD2.png': [(160, 245, 405, 492)]}   # the blue movement arrow
+# Boxes where drawn arrows (lighter than the blue background) must be kept opaque, keyed by file name.
+KEEP = {'AR2.png': [(975, 585, 1157, 760), (645, 630, 812, 805)]}   # the two blue rotation arrows
+PAD_ALIGN = False
 # Where the wall meets the floor, as a fraction of the figure's height above its lowest point.
 # Raise it for perspective drawings where the man lies "behind" the bench feet.
 FLOOR_FOR = {'bench-crunch': 0.30}
@@ -96,6 +106,16 @@ def metal_mask(path):
     m = ((mx - mn) < 28) & (mx > 95) & (mx < 235)
     h, w = m.shape; e = int(.08 * min(h, w))
     m[:e] = m[-e:] = False; m[:, :e] = m[:, -e:] = False
+    return m.astype(float)
+
+
+def pad_mask(path):
+    """Near-black pixels in the lower part of the picture: the bench pad (when its metal legs are cut off)."""
+    a = np.asarray(Image.open(path).convert('RGB'), float)
+    h = a.shape[0]
+    mx, mn = a.max(axis=2), a.min(axis=2)
+    m = (mx < 70) & (mx - mn < 30)
+    m[:int(h * .62)] = False
     return m.astype(float)
 
 
@@ -172,8 +192,21 @@ def cutout(path):
     alpha = np.clip((hi - blueness(a)) / (hi - lo), 0, 1)
     alpha = np.asarray(Image.fromarray((alpha * 255).astype('uint8')).filter(ImageFilter.MedianFilter(3)), float) / 255
     alpha = drop_border_frames(a, alpha)
+    for x0, y0, x1, y1 in ERASE.get(os.path.basename(path), []):   # drawn arrows etc. that don't belong
+        box = a[y0:y1, x0:x1]
+        lightish = (box.min(axis=2) > 120) | (box[..., 2] - box[..., 0] > 40)   # white outline or blue arrow,
+        skin = (box[..., 0] > 150) & (box[..., 0] - box[..., 2] > 45)            # but never skin or the dark dumbbell
+        sub = alpha[y0:y1, x0:x1]
+        sub[lightish & ~skin] = 0
     alpha = drop_specks(alpha)
-    edge = (alpha > 0) & (alpha < 1)                               # remove the blue cast from soft edges
+    for x0, y0, x1, y1 in KEEP.get(os.path.basename(path), []):
+        box = a[y0:y1, x0:x1]
+        lit = np.clip((box.mean(axis=2) - 110) / 40, 0, 1)        # arrow is much lighter than the background
+        alpha[y0:y1, x0:x1] = np.maximum(alpha[y0:y1, x0:x1], lit)
+    keep_box = np.zeros(alpha.shape, bool)
+    for x0, y0, x1, y1 in KEEP.get(os.path.basename(path), []):
+        keep_box[y0:y1, x0:x1] = True
+    edge = (alpha > 0) & (alpha < 1) & ~keep_box                       # don't strip the blue from kept arrows                               # remove the blue cast from soft edges
     a[..., 2] = np.where(edge, np.minimum(a[..., 2], np.maximum(a[..., 0], a[..., 1]) + 10), a[..., 2])
     rgba = np.dstack([a, alpha * 255]).clip(0, 255).astype('uint8')
     return Image.fromarray(rgba).convert('RGBa')
@@ -360,7 +393,11 @@ def render(paths, right=False, metal=False):
     ref = cuts[0]; W, H = ref.size
     fits = [(1.0, 0.0, 0.0)]
     for p, c in zip(paths[1:], cuts[1:]):
-        if metal:
+        if PAD_ALIGN:
+            saved, BAND = BAND, 0.0
+            iou, s, tx, ty = fit(pad_mask(paths[0]), pad_mask(p))
+            BAND = saved
+        elif metal:
             saved, BAND = BAND, 0.0
             iou, s, tx, ty = fit(metal_mask(paths[0]), metal_mask(p))
             BAND = saved
@@ -418,8 +455,9 @@ def main(only):
         if only and ex_id not in only:
             continue
         print(ex_id)
-        global BAND, FLOOR, NUDGE
+        global BAND, FLOOR, NUDGE, PAD_ALIGN
         NUDGE = ex_id in NUDGE_FOR
+        PAD_ALIGN = ex_id in ALIGN_PAD
         BAND = BAND_FOR.get(ex_id, 0.72)
         FLOOR = FLOOR_FOR.get(ex_id, 0.10)
         out = f'assets/exercises/{ex_id}'

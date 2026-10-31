@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  const APP_VERSION = '1.4';   // shown in the footer; bump with each release (1.1, 1.2, ...)
+  const APP_VERSION = '1.5';   // shown in the footer; bump with each release (1.1, 1.2, ...)
   const CREATOR = 'Assaf Hovevei Sion';
   const EXERCISES = Array.isArray(window.EXERCISES) ? window.EXERCISES : [];
   const CATEGORIES = ['Home Basics', 'Core Muscles', 'Extra Home Strength', 'Wrist Flexors'];
@@ -353,34 +353,62 @@
     const chips = [...bar.querySelectorAll('.sec-bar__chip')];
     const sections = [...main.querySelectorAll('.category')];
     const index = main.querySelector('.sec-index');
+    const barInner = bar.querySelector('.sec-bar__inner');
+    const headerH = () => document.querySelector('.site-header').offsetHeight;
+    // Where a section's top should sit: just below the header and the (visible) chip bar.
+    const targetY = (n) => {
+      const el = document.getElementById(`sec-${n}`);
+      return Math.max(0, el.getBoundingClientRect().top + window.scrollY - headerH() - barInner.offsetHeight);
+    };
+    let jumping = null;   // section number while a jump is in progress
+    let settleTimer = 0;
     main.addEventListener('click', (e) => {
       const link = e.target.closest('[data-jump]');
       if (!link) return;
       e.preventDefault();
-      const target = document.getElementById(`sec-${link.dataset.jump}`);
-      const top = target.getBoundingClientRect().top + window.scrollY - stickyOffset() + 1;
-      window.scrollTo({ top, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+      const n = Number(link.dataset.jump);
+      jumping = n;
+      highlight(n - 1);
+      window.scrollTo({ top: targetY(n), behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+      // When scrolling stops, make sure we ended exactly on the section (layout can shift while scrolling).
+      clearTimeout(settleTimer);
+      const settle = () => {
+        clearTimeout(settleTimer);
+        settleTimer = setTimeout(() => {
+          const y = targetY(n);
+          if (Math.abs(window.scrollY - y) > 2) window.scrollTo({ top: y, behavior: 'auto' });
+          jumping = null;
+          syncBar();
+        }, 140);
+      };
+      window.addEventListener('scroll', settle, { passive: true });
+      settle();
+      setTimeout(() => window.removeEventListener('scroll', settle), 3000);
     });
-    function stickyOffset() {
-      const header = document.querySelector('.site-header').offsetHeight;
-      return header + (bar.classList.contains('is-on') || window.scrollY > 0 ? bar.offsetHeight : 0);
-    }
-    // Show the bar once the index has scrolled away; highlight the section currently in view.
-    function syncBar() {
-      const header = document.querySelector('.site-header').offsetHeight;
-      const show = index.getBoundingClientRect().bottom < header;
-      bar.classList.toggle('is-on', show);
-      bar.setAttribute('aria-hidden', String(!show));
-      chips.forEach((ch) => { ch.tabIndex = show ? 0 : -1; });
-      const line = header + bar.offsetHeight + 24;
-      let current = -1;
-      sections.forEach((sec, k) => { if (sec.getBoundingClientRect().top <= line) current = k; });
-      chips.forEach((ch, k) => {
-        const on = k === current;
-        if (on && !ch.classList.contains('is-current')) ch.scrollIntoView({ block: 'nearest', inline: 'center' });
+    // Highlight a chip and slide the chip row (not the page) so it is visible.
+    // Never use scrollIntoView here: it cancels the page's smooth scroll mid-jump.
+    function highlight(k) {
+      chips.forEach((ch, i) => {
+        const on = i === k;
+        if (on && !ch.classList.contains('is-current')) {
+          const left = ch.offsetLeft - (barInner.clientWidth - ch.offsetWidth) / 2;
+          barInner.scrollTo({ left: Math.max(0, left), behavior: 'auto' });
+        }
         ch.classList.toggle('is-current', on);
         if (on) ch.setAttribute('aria-current', 'true'); else ch.removeAttribute('aria-current');
       });
+    }
+    // Show the bar once the index has scrolled away; highlight the section currently in view.
+    function syncBar() {
+      const show = index.getBoundingClientRect().bottom < headerH();
+      bar.classList.toggle('is-on', show);
+      bar.setAttribute('aria-hidden', String(!show));
+      chips.forEach((ch) => { ch.tabIndex = show ? 0 : -1; });
+      if (jumping) return;                      // keep the chosen chip lit while the jump scrolls past others
+      const line = headerH() + barInner.offsetHeight + 24;
+      let current = -1;
+      sections.forEach((sec, k) => { if (sec.getBoundingClientRect().top <= line) current = k; });
+      highlight(current);
     }
     let raf = 0;
     const onScrollBar = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; syncBar(); }); };
